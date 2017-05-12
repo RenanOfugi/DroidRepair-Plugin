@@ -1,8 +1,7 @@
 <idea-plugin>
   <id>com.your.company.unique.plugin.id</id>
-  <name>Plugin display name here</name>
+  <name>Angelix Plugin</name>
   <version>1.0</version>
-  <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
 
   <description><![CDATA[
       Enter short description for your plugin here.<br>
@@ -16,7 +15,7 @@
   </change-notes>
 
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-  <idea-version since-build="145.0"/>
+  <idea-version since-build="171" />
 
   <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
        on how to target different products -->
@@ -30,6 +29,11 @@
 
   <actions>
     <!-- Add your actions here -->
+    <action id="angelix_plugin.SelectAngelix" class="com.ufg.i4soft.angelix_plugin.actions.RunAngelix" text="Run Angelix"
+            description="Roda o programa atual no Angelix">
+      <add-to-group group-id="MainMenu" anchor="first"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt I"/>
+    </action>
   </actions>
 
 </idea-plugin>
