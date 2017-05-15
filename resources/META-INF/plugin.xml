@@ -29,11 +29,17 @@
 
   <actions>
     <!-- Add your actions here -->
-    <action id="angelix_plugin.SelectAngelix" class="com.ufg.i4soft.angelix_plugin.actions.RunAngelix" text="Run Angelix"
-            description="Roda o programa atual no Angelix">
-      <add-to-group group-id="MainMenu" anchor="first"/>
-      <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt I"/>
-    </action>
+    <group id="Angelix_Plugin.runAngelix" text="Angelix">
+
+      <add-to-group group-id="MainMenu" relative-to-action="RunMenu" anchor="after"/>
+
+      <action id="angelix_plugin.runAngelix" class="com.ufg.i4soft.angelix_plugin.actions.runAngelix" text="run Angelix"
+              description="visa rodar o angelix no programa atual" >
+        <keyboard-shortcut first-keystroke="ctrl I" keymap="$default" />
+      </action>
+
+    </group>
+
   </actions>
 
 </idea-plugin>
