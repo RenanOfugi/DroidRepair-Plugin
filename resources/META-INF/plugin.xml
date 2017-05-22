@@ -33,7 +33,7 @@
 
       <add-to-group group-id="MainMenu" relative-to-action="RunMenu" anchor="after"/>
 
-      <action id="angelix_plugin.runAngelix" class="com.ufg.i4soft.angelix_plugin.actions.runAngelix" text="run Angelix"
+      <action id="angelix_plugin.runAngelix" class="com.ufg.i4soft.angelix_plugin.view.actions.runAngelix" text="run Angelix"
               description="visa rodar o angelix no programa atual" >
         <keyboard-shortcut first-keystroke="ctrl I" keymap="$default" />
       </action>
