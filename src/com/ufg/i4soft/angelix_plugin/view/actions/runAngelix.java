@@ -9,7 +9,7 @@ import com.ufg.i4soft.angelix_plugin.view.windows.MainWindows;
 public class runAngelix extends AnAction {
 
     public runAngelix(){
-        super("testando plugin");
+        super("Plugin Angelix");
     }
 
     @Override
@@ -21,7 +21,6 @@ public class runAngelix extends AnAction {
     private void testePlugin(AnActionEvent event){
 
         Project project = event.getData(PlatformDataKeys.PROJECT);
-       // MainWindows.windowsInput(project);
         MainWindows.viewChooseFile(project);
     }
 }

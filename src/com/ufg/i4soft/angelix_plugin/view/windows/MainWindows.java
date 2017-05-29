@@ -10,15 +10,9 @@ import com.intellij.openapi.vfs.VirtualFile;
 
 public class MainWindows {
 
-    public static void windowsInput(Project project) {
+    public static void viewMessages(Project project, String message, String title) {
 
-        String txt= Messages.showInputDialog(project, "Qual o seu nome?", "Entre com seu nome", Messages.getInformationIcon());
-
-        if (txt != null){
-            Messages.showMessageDialog(project, "Olá " + txt + "!\n Aqui estou tentando testar um plugin simples.", "Information", Messages.getInformationIcon());
-        } else{
-            Messages.showMessageDialog(project, "Você não tem um nome...", "Error", Messages.getErrorIcon());
-        }
+        Messages.showMessageDialog(project, message, title, Messages.getInformationIcon());
     }
 
     public static void windowsCheckboxes() {
