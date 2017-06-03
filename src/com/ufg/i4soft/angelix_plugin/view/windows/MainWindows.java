@@ -5,15 +5,11 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 
+import javax.swing.*;
+
 public class MainWindows {
-
-    public static void viewMessages(Project project, String message, String title) {
-
-        Messages.showMessageDialog(project, message, title, Messages.getInformationIcon());
-    }
 
     public static void windowsCheckboxes() {
 
@@ -31,8 +27,21 @@ public class MainWindows {
         String path = null;
         if (file != null){
             path = file.getPath();
+        } else {
+            Messages.showMessageDialog(project, "Não foi identificado nenhum diretório válido", "Parâmetro Inválido", Messages.getWarningIcon());
         }
 
         return path;
+    }
+
+    public static String viewInput(Project project){
+
+        String args = Messages.showInputDialog(project, "Insira os parâmetros para o Angelix", "Inserção De Parâmetros", Messages.getInformationIcon());
+
+        if (args == null){
+            Messages.showMessageDialog(project, "Não foi identificado nenhuma entrada de parâmetros", "Parâmetro Inválido", Messages.getWarningIcon());
+        }
+
+        return args;
     }
 }
