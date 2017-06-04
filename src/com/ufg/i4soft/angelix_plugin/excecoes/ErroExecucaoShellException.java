@@ -1,6 +1,8 @@
 package com.ufg.i4soft.angelix_plugin.excecoes;
 
-public class ErroExecucaoException extends RuntimeException{
+public class ErroExecucaoShellException extends RuntimeException {
 
-    public 
+    public ErroExecucaoShellException(final String campo) {
+        super(campo);
+    }
 }

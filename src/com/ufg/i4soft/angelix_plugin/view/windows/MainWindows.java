@@ -6,6 +6,7 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.ufg.i4soft.angelix_plugin.controller.FilterData;
 
 import javax.swing.*;
 
@@ -19,26 +20,21 @@ public class MainWindows {
     public static String viewChooseFile(Project project) {
 
         final FileChooserDescriptor descriptor = FileChooserDescriptorFactory.createSingleFileDescriptor();
-        descriptor.setTitle("Selecione o diretório do angelix");
-        descriptor.setDescription("Selecione o diretório onde se localiza o Angelix");
+        descriptor.setTitle("Selecione O Diretório Do Arquivo");
+        descriptor.setDescription("Selecione o arquivo que deseja submeter à execução do angelix");
 
         VirtualFile file = FileChooser.chooseFile(descriptor, project, null);
 
-        String path = null;
-        if (file != null){
-            path = file.getPath();
-        } else {
-            Messages.showMessageDialog(project, "Não foi identificado nenhum diretório válido", "Parâmetro Inválido", Messages.getWarningIcon());
-        }
+        FilterData filterData = new FilterData();
 
-        return path;
+        return filterData.filterPath(file,project);
     }
 
-    public static String viewInput(Project project){
+    public static String viewInput(Project project) {
 
         String args = Messages.showInputDialog(project, "Insira os parâmetros para o Angelix", "Inserção De Parâmetros", Messages.getInformationIcon());
 
-        if (args == null){
+        if (args == null) {
             Messages.showMessageDialog(project, "Não foi identificado nenhuma entrada de parâmetros", "Parâmetro Inválido", Messages.getWarningIcon());
         }
 
