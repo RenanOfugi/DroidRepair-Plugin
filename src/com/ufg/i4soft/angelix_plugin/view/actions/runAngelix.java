@@ -39,16 +39,18 @@ public class runAngelix extends AnAction {
         String path = MainWindows.viewChooseFile(project);
 
         if (path != null) {
+
             FilterData filterData = new FilterData();
             String[] subPathes = filterData.splitPath(path);
             parameters.add(subPathes[0]);
             parameters.add(subPathes[1]);
+
+            String outros_paramentros = MainWindows.viewInput(project);
+            parameters.add(outros_paramentros);
+
         } else {
             parameters.add(null);
         }
-
-        String outros_paramentros = MainWindows.viewInput(project);
-        parameters.add(outros_paramentros);
 
         return parameters;
     }

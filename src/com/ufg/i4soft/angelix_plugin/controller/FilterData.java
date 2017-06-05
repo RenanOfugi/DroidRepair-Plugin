@@ -10,14 +10,11 @@ public class FilterData {
 
         String path;
 
-        if (file != null && !file.getPath().endsWith("\\")) {
+        if (file != null && !file.getPath().endsWith("/")) {
 
             path = file.getPath();
             return path;
 
-        } else if (file != null && file.getPath().endsWith("\\")) {
-            Messages.showMessageDialog(project, "O diretório escolhido não é um arquivo", "Parâmetro Inválido", Messages.getWarningIcon());
-            return null;
         } else {
             Messages.showMessageDialog(project, "Não foi identificado nenhum diretório válido", "Parâmetro Inválido", Messages.getWarningIcon());
             return null;
@@ -26,11 +23,11 @@ public class FilterData {
 
     public String[] splitPath(String path) {
 
-        int local_split = path.lastIndexOf("\\");
+        int local_split = path.lastIndexOf("/");
 
         String[] subPath = new String[2];
-        subPath[0] = path.substring(0, local_split + 1);
-        subPath[1] = path.substring(local_split, path.length());
+        subPath[0] = path.substring(0, local_split);
+        subPath[1] = path.substring(local_split + 1, path.length());
 
         return subPath;
     }

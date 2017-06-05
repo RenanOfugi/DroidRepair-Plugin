@@ -24,9 +24,6 @@ public class ManageAngelix {
 
         if (parametrosNaoVazios) {
             executeAngelix(args);
-        } else {
-            Messages.showMessageDialog("Não foi identificado nenhuma entrada de parâmetros", "Parâmetro Inválido", Messages.getErrorIcon());
-            throw new ParametrosVaziosException("Não foi possível executar o Angelix: Está faltando parâmetros necessários");
         }
     }
 
