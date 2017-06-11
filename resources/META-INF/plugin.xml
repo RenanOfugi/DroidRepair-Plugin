@@ -4,7 +4,7 @@
   <version>1.0</version>
 
   <description><![CDATA[
-      Enter short description for your plugin here.<br>
+      Plugin que permite executar ferramentas de reparo automatizado de software integrado ao Android Studio.<br>
       <em>most HTML tags may be used</em>
     ]]></description>
 
@@ -29,11 +29,11 @@
 
   <actions>
     <!-- Add your actions here -->
-    <group id="Angelix_Plugin.runAngelix" text="Angelix">
+    <group id="Angelix_Plugin.runAngelix" text="Repair">
 
       <add-to-group group-id="MainMenu" relative-to-action="RunMenu" anchor="after"/>
 
-      <action id="angelix_plugin.runAngelix" class="com.ufg.i4soft.angelix_plugin.view.actions.runAngelix" text="run Angelix"
+      <action id="angelix_plugin.runAngelix" class="com.ufg.i4soft.angelix_plugin.view.actions.runAngelix" text="run repair"
               description="visa rodar o angelix no programa atual" >
         <keyboard-shortcut first-keystroke="ctrl I" keymap="$default" />
       </action>

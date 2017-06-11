@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class runAngelix extends AnAction {
 
     public runAngelix() {
-        super("Plugin Angelix");
+        super("Plugin Repair");
     }
 
     @Override
