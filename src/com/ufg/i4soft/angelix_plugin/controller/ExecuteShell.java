@@ -31,7 +31,7 @@ public class ExecuteShell {
 
         } catch (IOException e) {
 
-            Messages.showMessageDialog( "Erro ao tentar executar o comando no Angelix", "Crash!", Messages.getErrorIcon());
+            Messages.showMessageDialog( "Erro ao tentar executar o comando no Angelix", "Comando Inválido", Messages.getErrorIcon());
             throw new ErroExecucaoShellException("Erro ao tentar executar o comando no Angelix");
 
         } catch (InterruptedException e) {
