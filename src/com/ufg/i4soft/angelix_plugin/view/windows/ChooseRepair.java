@@ -1,43 +1,72 @@
-public class ChooseRepair extends javax.swing.JDialog {
-private javax.swing.JPanel contentPane;
-private javax.swing.JButton buttonOK;
-private javax.swing.JButton buttonCancel;
+package com.ufg.i4soft.angelix_plugin.view.windows;
 
-public ChooseRepair(){
-setContentPane(contentPane);
-setModal(true);
-getRootPane().setDefaultButton(buttonOK);
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
-buttonOK.addActionListener(new java.awt.event.ActionListener(){public void actionPerformed(java.awt.event.ActionEvent e){onOK();}});
+public class ChooseRepair extends JDialog {
+    private JPanel contentPane;
+    private JButton buttonOK;
+    private JButton buttonCancel;
+    private JRadioButton angelixRadioButton;
+    private JRadioButton genProgRadioButton;
 
-buttonCancel.addActionListener(new java.awt.event.ActionListener(){public void actionPerformed(java.awt.event.ActionEvent e){onCancel();}});
+    public ChooseRepair() {
+        setContentPane(contentPane);
+        setModal(true);
+        getRootPane().setDefaultButton(buttonOK);
 
- // call onCancel() when cross is clicked
-setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-addWindowListener(new java.awt.event.WindowAdapter() {
-  public void windowClosing(java.awt.event.WindowEvent e) {
-   onCancel();
-  }
-});
+       // centerWindows();
+        OneChoise();
 
- // call onCancel() on ESCAPE
-contentPane.registerKeyboardAction(  new java.awt.event.ActionListener() {    public void actionPerformed(java.awt.event.ActionEvent e) {      onCancel();
-    }  },  javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0),  javax.swing.JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);}
+        buttonOK.addActionListener(e -> onOK());
 
-private void onOK(){
- // add your code here
-dispose();
-}
+        buttonCancel.addActionListener(e -> onCancel());
 
-private void onCancel(){
- // add your code here if necessary
-dispose();
-}
+        // call onCancel() when cross is clicked
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                onCancel();
+            }
+        });
 
-public static void main(String[] args){
-ChooseRepair dialog = new ChooseRepair();
-dialog.pack();
-dialog.setVisible(true);
-System.exit(0);
-}
+        // call onCancel() on ESCAPE
+        contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+    }
+
+    private void onOK() {
+        // add your code here
+        dispose();
+    }
+
+    private void onCancel() {
+        // add your code here if necessary
+        dispose();
+    }
+
+    private void OneChoise(){
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(angelixRadioButton);
+        group.add(genProgRadioButton);
+    }
+
+    private void centerWindows(){
+
+        final Toolkit toolkit = Toolkit.getDefaultToolkit();
+        final Dimension screenSize = toolkit.getScreenSize();
+        final int width = (screenSize.width - getWidth()) / 2;
+        final int height = (screenSize.height - getHeight()) / 2;
+        setLocation(width, height);
+    }
+
+    public static void main(String[] args) {
+        ChooseRepair dialog = new ChooseRepair();
+        dialog.pack();
+        dialog.setTitle("Escolha da Ferramenta de Reparo");
+        dialog.setSize(500,300);
+        dialog.centerWindows();
+        dialog.setVisible(true);
+    }
 }

@@ -6,6 +6,7 @@ import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.project.Project;
 import com.ufg.i4soft.angelix_plugin.controller.FilterData;
 import com.ufg.i4soft.angelix_plugin.controller.ManageAngelix;
+import com.ufg.i4soft.angelix_plugin.view.windows.ChooseRepair;
 import com.ufg.i4soft.angelix_plugin.view.windows.MainWindows;
 
 import java.util.ArrayList;
@@ -19,7 +20,8 @@ public class runAngelix extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent event) {
 
-        runPlugin(event);
+        //runPlugin(event);
+        ChooseRepair.main(null);
     }
 
     private void runPlugin(AnActionEvent event) {

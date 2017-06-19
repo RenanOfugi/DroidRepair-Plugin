@@ -8,8 +8,6 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.ufg.i4soft.angelix_plugin.controller.FilterData;
 
-import javax.swing.*;
-
 public class MainWindows {
 
     public static void windowsCheckboxes() {
