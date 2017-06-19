@@ -4,6 +4,7 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.Messages;
 import com.ufg.i4soft.angelix_plugin.controller.FilterData;
 import com.ufg.i4soft.angelix_plugin.controller.ManageAngelix;
 import com.ufg.i4soft.angelix_plugin.view.windows.ChooseRepair;
@@ -20,8 +21,24 @@ public class runAngelix extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent event) {
 
-        //runPlugin(event);
         ChooseRepair.main(null);
+        selectRepair(ChooseRepair.getChoiceRepair(),event);
+    }
+
+    private void selectRepair(String repair, AnActionEvent event){
+
+        switch (repair){
+
+            case "angelix":
+                runPlugin(event);
+                break;
+
+            case "genprog":
+                break;
+
+            default:
+                Messages.showMessageDialog("escolha de ferramenta inválida", "Ferramenta De Reparo Inválido", Messages.getWarningIcon());
+        }
     }
 
     private void runPlugin(AnActionEvent event) {

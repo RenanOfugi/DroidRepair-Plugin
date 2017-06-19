@@ -10,11 +10,6 @@ import com.ufg.i4soft.angelix_plugin.controller.FilterData;
 
 public class MainWindows {
 
-    public static void windowsCheckboxes() {
-
-        //TODO: Esta classe deverá implementar a interface de usuário que permitirá a escolha do tipo de ferramenta de reparo automatizado de código
-    }
-
     public static String viewChooseFile(Project project) {
 
         final FileChooserDescriptor descriptor = FileChooserDescriptorFactory.createSingleFileDescriptor();
