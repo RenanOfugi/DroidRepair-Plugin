@@ -2,7 +2,7 @@ package com.ufg.i4soft.angelix_plugin.model;
 
 import com.intellij.openapi.project.Project;
 
-public class ProjectDate {
+public class ProjectData {
 
     private static Project project;
     private static String typeRepair;
@@ -12,7 +12,7 @@ public class ProjectDate {
     }
 
     public static void setProject(Project project) {
-        ProjectDate.project = project;
+        ProjectData.project = project;
     }
 
     public static String getTypeRepair() {
@@ -20,6 +20,6 @@ public class ProjectDate {
     }
 
     public static void setTypeRepair(String typeRepair) {
-        ProjectDate.typeRepair = typeRepair;
+        ProjectData.typeRepair = typeRepair;
     }
 }

@@ -1,5 +1,7 @@
 package com.ufg.i4soft.angelix_plugin.view.windows;
 
+import com.ufg.i4soft.angelix_plugin.model.ProjectData;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -10,12 +12,6 @@ public class ChooseRepair extends JDialog {
     private JButton buttonCancel;
     private JRadioButton angelixRadioButton;
     private JRadioButton genProgRadioButton;
-
-    private static String choiceRepair;
-
-    public static String getChoiceRepair() {
-        return choiceRepair;
-    }
 
     public ChooseRepair() {
         setContentPane(contentPane);
@@ -44,9 +40,9 @@ public class ChooseRepair extends JDialog {
     private void onOK() {
 
         if (angelixRadioButton.isSelected()) {
-            choiceRepair = "angelix";
+            ProjectData.setTypeRepair("angelix");
         } else if (genProgRadioButton.isSelected()) {
-            choiceRepair = "genprog";
+            ProjectData.setTypeRepair("genprog");
         }
 
         dispose();

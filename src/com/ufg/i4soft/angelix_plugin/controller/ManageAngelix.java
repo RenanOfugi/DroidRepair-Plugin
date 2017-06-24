@@ -2,14 +2,38 @@ package com.ufg.i4soft.angelix_plugin.controller;
 
 import com.intellij.openapi.ui.Messages;
 import com.ufg.i4soft.angelix_plugin.excecoes.ParametrosVaziosException;
+import com.ufg.i4soft.angelix_plugin.view.windows.MainWindows;
 
 import java.util.ArrayList;
 
 public class ManageAngelix {
 
-    public void runAngelix(ArrayList<String> args){
+    public void runAngelix(String path){
+
+        ArrayList<String> args = collectParameters(path);
 
         verifyInputs(args);
+    }
+
+    private ArrayList<String> collectParameters(String path){
+
+        ArrayList<String> parameters = new ArrayList<>();
+
+        if (path != null) {
+
+            FilterData filterData = new FilterData();
+            String[] subPathes = filterData.splitPath(path);
+            parameters.add(subPathes[0]);
+            parameters.add(subPathes[1]);
+
+            String outros_paramentros = MainWindows.viewInput();
+            parameters.add(outros_paramentros);
+
+        } else {
+            parameters.add("");
+        }
+
+        return parameters;
     }
 
     private void verifyInputs(ArrayList<String> args) {

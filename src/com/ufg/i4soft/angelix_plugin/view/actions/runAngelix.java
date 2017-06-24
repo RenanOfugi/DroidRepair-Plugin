@@ -5,32 +5,39 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
-import com.ufg.i4soft.angelix_plugin.controller.FilterData;
 import com.ufg.i4soft.angelix_plugin.controller.ManageAngelix;
+import com.ufg.i4soft.angelix_plugin.model.ProjectData;
 import com.ufg.i4soft.angelix_plugin.view.windows.ChooseRepair;
 import com.ufg.i4soft.angelix_plugin.view.windows.MainWindows;
 
-import java.util.ArrayList;
+import java.util.Optional;
 
 public class runAngelix extends AnAction {
+
+    private static AnActionEvent event;
 
     public runAngelix() {
         super("Plugin Repair");
     }
 
+    public static AnActionEvent getEvent() {
+        return event;
+    }
+
     @Override
     public void actionPerformed(AnActionEvent event) {
 
-        ChooseRepair.main(null);
-        selectRepair(ChooseRepair.getChoiceRepair(),event);
+        runAngelix.event = event;
+        runPlugin();
     }
 
-    private void selectRepair(String repair, AnActionEvent event){
+    private void selectRepair(String repair, String path){
 
         switch (repair){
 
             case "angelix":
-                runPlugin(event);
+                ManageAngelix angelix = new ManageAngelix();
+                angelix.runAngelix(path);
                 break;
 
             case "genprog":
@@ -41,37 +48,28 @@ public class runAngelix extends AnAction {
         }
     }
 
-    private void runPlugin(AnActionEvent event) {
+    private void runPlugin() {
 
-        Project project = event.getData(PlatformDataKeys.PROJECT);
+        setProject();
 
-        ArrayList<String> parameters = collectParameter(project);
+        Optional<String> pathOptional = Optional.ofNullable(collectPath());
 
-        ManageAngelix angelix = new ManageAngelix();
-        angelix.runAngelix(parameters);
+        if (pathOptional.isPresent()){
+
+            ChooseRepair.main(null);
+            selectRepair(ProjectData.getTypeRepair(), pathOptional.get());
+        }
     }
 
-    private ArrayList<String> collectParameter(Project project) {
+    private void setProject(){
 
-        ArrayList<String> parameters = new ArrayList<>();
+        Project project = event.getData(PlatformDataKeys.PROJECT);
+        ProjectData.setProject(project);
+    }
 
-        String path = MainWindows.viewChooseFile(project);
+    private String collectPath() {
 
-        if (path != null) {
-
-            FilterData filterData = new FilterData();
-            String[] subPathes = filterData.splitPath(path);
-            parameters.add(subPathes[0]);
-            parameters.add(subPathes[1]);
-
-            String outros_paramentros = MainWindows.viewInput(project);
-            parameters.add(outros_paramentros);
-
-        } else {
-            parameters.add(null);
-        }
-
-        return parameters;
+        return MainWindows.viewChooseFile();
     }
 
 }
