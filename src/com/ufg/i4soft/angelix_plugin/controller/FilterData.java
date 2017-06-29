@@ -1,8 +1,6 @@
 package com.ufg.i4soft.angelix_plugin.controller;
 
-import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.ufg.i4soft.angelix_plugin.model.ProjectData;
 
 public class FilterData {
 
@@ -15,10 +13,9 @@ public class FilterData {
             path = file.getPath();
             return path;
 
-        } else {
-            Messages.showMessageDialog(ProjectData.getProject(), "Não foi identificado nenhum diretório válido", "Diretório Inválido", Messages.getWarningIcon());
-            return null;
         }
+
+        return null;
     }
 
     public String[] splitPath(String path) {

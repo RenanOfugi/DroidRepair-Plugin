@@ -1,7 +1,5 @@
 package com.ufg.i4soft.angelix_plugin.controller;
 
-import com.intellij.openapi.ui.Messages;
-import com.ufg.i4soft.angelix_plugin.excecoes.ParametrosVaziosException;
 import com.ufg.i4soft.angelix_plugin.view.windows.MainWindows;
 
 import java.util.ArrayList;

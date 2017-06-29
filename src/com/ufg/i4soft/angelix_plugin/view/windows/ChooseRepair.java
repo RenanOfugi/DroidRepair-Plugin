@@ -46,16 +46,16 @@ public class ChooseRepair extends JDialog {
     private void onOK() {
 
         if (angelixRadioButton.isSelected()) {
-            this.typerepair = "angelix";
+            typerepair = "angelix";
         } else if (genProgRadioButton.isSelected()) {
-            this.typerepair = "genprog";
+            typerepair = "genprog";
         }
 
         dispose();
     }
 
     private void onCancel() {
-        // add your code here if necessary
+        typerepair = "typeCancel";
         dispose();
     }
 
