@@ -12,11 +12,11 @@ import com.ufg.i4soft.angelix_plugin.view.windows.MainWindows;
 
 import java.util.Optional;
 
-public class runAngelix extends AnAction {
+public class run extends AnAction {
 
     private static AnActionEvent event;
 
-    public runAngelix() {
+    public run() {
         super("Plugin Repair");
     }
 
@@ -27,13 +27,13 @@ public class runAngelix extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent event) {
 
-        runAngelix.event = event;
+        run.event = event;
         runPlugin();
     }
 
-    private void selectRepair(String repair, String path){
+    private void selectRepair(String repair, String path) {
 
-        switch (repair){
+        switch (repair) {
 
             case "angelix":
                 ManageAngelix angelix = new ManageAngelix();
@@ -54,14 +54,18 @@ public class runAngelix extends AnAction {
 
         Optional<String> pathOptional = Optional.ofNullable(collectPath());
 
-        if (pathOptional.isPresent()){
+        if (pathOptional.isPresent()) {
 
-            ChooseRepair.main(null);
-            selectRepair(ProjectData.getTypeRepair(), pathOptional.get());
+            ChooseRepair.showTypeRepair();
+
+            ProjectData data = new ProjectData();
+            data.setTypeRepair(ChooseRepair.getTyperepair());
+
+            selectRepair(data.getTypeRepair(), pathOptional.get());
         }
     }
 
-    private void setProject(){
+    private void setProject() {
 
         Project project = event.getData(PlatformDataKeys.PROJECT);
         ProjectData.setProject(project);

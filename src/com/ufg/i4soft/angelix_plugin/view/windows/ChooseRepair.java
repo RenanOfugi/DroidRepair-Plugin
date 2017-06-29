@@ -13,7 +13,13 @@ public class ChooseRepair extends JDialog {
     private JRadioButton angelixRadioButton;
     private JRadioButton genProgRadioButton;
 
-    public ChooseRepair() {
+    private static String typerepair;
+
+    public static String getTyperepair() {
+        return typerepair;
+    }
+
+    private ChooseRepair() {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -40,9 +46,9 @@ public class ChooseRepair extends JDialog {
     private void onOK() {
 
         if (angelixRadioButton.isSelected()) {
-            ProjectData.setTypeRepair("angelix");
+            this.typerepair = "angelix";
         } else if (genProgRadioButton.isSelected()) {
-            ProjectData.setTypeRepair("genprog");
+            this.typerepair = "genprog";
         }
 
         dispose();
@@ -69,12 +75,13 @@ public class ChooseRepair extends JDialog {
         setLocation(width, height);
     }
 
-    public static void main(String[] args) {
+    public static void showTypeRepair() {
         ChooseRepair dialog = new ChooseRepair();
         dialog.pack();
         dialog.setTitle("Escolha da Ferramenta de Reparo");
         dialog.setSize(500, 300);
         dialog.centerWindows();
         dialog.setVisible(true);
+
     }
 }
