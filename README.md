@@ -4,7 +4,7 @@
 
 ## Execução
 
-A execução do plugin é realizada a partir de um local na *Toolbar*denominada *Repair*
+A execução do plugin é realizada a partir de um local na *Toolbar* denominada *Repair*.
 
 ## Ferramentas Suportadas
 
