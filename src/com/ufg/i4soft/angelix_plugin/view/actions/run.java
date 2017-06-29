@@ -31,23 +31,6 @@ public class run extends AnAction {
         runPlugin();
     }
 
-    private void selectRepair(String repair, String path) {
-
-        switch (repair) {
-
-            case "angelix":
-                ManageAngelix angelix = new ManageAngelix();
-                angelix.runAngelix(path);
-                break;
-
-            case "genprog":
-                break;
-
-            default:
-                Messages.showMessageDialog("escolha de ferramenta inválida", "Ferramenta De Reparo Inválido", Messages.getWarningIcon());
-        }
-    }
-
     private void runPlugin() {
 
         setProject();
@@ -69,6 +52,23 @@ public class run extends AnAction {
 
         Project project = event.getData(PlatformDataKeys.PROJECT);
         ProjectData.setProject(project);
+    }
+
+    private void selectRepair(String repair, String path) {
+
+        switch (repair) {
+
+            case "angelix":
+                ManageAngelix angelix = new ManageAngelix();
+                angelix.runAngelix(path);
+                break;
+
+            case "genprog":
+                break;
+
+            default:
+                Messages.showMessageDialog("escolha de ferramenta inválida", "Ferramenta De Reparo Inválido", Messages.getWarningIcon());
+        }
     }
 
     private String collectPath() {
