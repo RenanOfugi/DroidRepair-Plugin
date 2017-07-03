@@ -64,6 +64,7 @@ public class run extends AnAction {
                 break;
 
             case "genprog":
+                Messages.showMessageDialog(ProjectData.getProject(), "Funcionalidade para " + repair + " não implementada :(", "Não É Possivel Executar", Messages.getWarningIcon());
                 break;
 
             default:

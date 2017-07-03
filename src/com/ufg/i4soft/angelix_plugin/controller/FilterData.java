@@ -18,7 +18,7 @@ public class FilterData {
         return null;
     }
 
-    public String[] splitPath(String path) {
+    String[] splitPath(String path) {
 
         int local_split = path.lastIndexOf("/");
 
