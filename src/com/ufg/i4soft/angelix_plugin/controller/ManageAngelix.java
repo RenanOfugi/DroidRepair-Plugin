@@ -55,9 +55,9 @@ public class ManageAngelix {
 
         String command = "angelix " + args.get(0) + " " + args.get(1) + " " + args.get(2);
 
-        String output = shell.executeCommand(command);
+        shell.executeCommand(command);
 
-        System.out.println(output);
+        //System.out.println(output);
     }
 
 }
