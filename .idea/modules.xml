@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/angelix_plugin.iml" filepath="$PROJECT_DIR$/angelix_plugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/plugin-repair.iml" filepath="$PROJECT_DIR$/.idea/modules/plugin-repair.iml" />
     </modules>
   </component>
 </project>
