@@ -14,16 +14,12 @@ class ExecuteShell {
 
     void executeCommand(String command) {
 
-        final ArrayList<String> commands = new ArrayList<String>();
+        final ArrayList<String> commands = new ArrayList<>();
         commands.add("/bin/bash");
         commands.add("-c");
         commands.add(command);
 
         BufferedReader reader = null;
-
-       // StringBuffer output = new StringBuffer();
-
-        //Process process;
 
         try {
 
@@ -33,10 +29,6 @@ class ExecuteShell {
             final InputStreamReader isr = new InputStreamReader(is);
             reader = new BufferedReader(isr);
 
-          /*  process = Runtime.getRuntime().exec(command);
-            process.waitFor();
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));*/
 
             String line;
 
@@ -52,14 +44,6 @@ class ExecuteShell {
         }finally {
             secureClose(reader);
         }
-
-        /*catch (InterruptedException e) {
-
-            Messages.showMessageDialog( "Tempo excedido de espera para execução do comando", "Crash!", Messages.getErrorIcon());
-            throw new FalhaEsperaException("Tempo excedido de espera para execução do comando");
-        }*/
-
-        //return output.toString();
     }
 
     private void secureClose(final Closeable resource) {

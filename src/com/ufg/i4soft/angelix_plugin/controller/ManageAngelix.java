@@ -57,7 +57,6 @@ public class ManageAngelix {
 
         shell.executeCommand(command);
 
-        //System.out.println(output);
     }
 
 }
