@@ -5,7 +5,7 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.ufg.i4soft.angelix_plugin.controller.FilterData;
+import com.ufg.i4soft.angelix_plugin.model.FilterData;
 import com.ufg.i4soft.angelix_plugin.model.ProjectData;
 
 public class MainWindows {

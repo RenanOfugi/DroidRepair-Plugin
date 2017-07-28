@@ -1,5 +1,6 @@
-package com.ufg.i4soft.angelix_plugin.controller;
+package com.ufg.i4soft.angelix_plugin.model;
 
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 
 public class FilterData {
@@ -18,7 +19,7 @@ public class FilterData {
         return null;
     }
 
-    String[] splitPath(String path) {
+    public String[] splitPath(String path) {
 
         int local_split = path.lastIndexOf("/");
 
@@ -27,5 +28,24 @@ public class FilterData {
         subPath[1] = path.substring(local_split + 1, path.length());
 
         return subPath;
+    }
+
+    public boolean verifyExtensionFile(String file){
+
+        String[] extensionValid = {".java", ".c"};
+        boolean valid;
+
+        for (String extension:extensionValid) {
+
+            valid = file.toLowerCase().contains(extension.toLowerCase());
+
+            if(valid){
+                return true;
+            }
+        }
+
+        Messages.showMessageDialog("Arquivo para reparo inválido", "Arquivo Inválido", Messages.getErrorIcon());
+
+        return false;
     }
 }

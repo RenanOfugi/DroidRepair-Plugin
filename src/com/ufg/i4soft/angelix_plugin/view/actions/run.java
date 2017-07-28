@@ -4,13 +4,8 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.Messages;
-import com.ufg.i4soft.angelix_plugin.controller.ManageAngelix;
+import com.ufg.i4soft.angelix_plugin.controller.ManagePlugin;
 import com.ufg.i4soft.angelix_plugin.model.ProjectData;
-import com.ufg.i4soft.angelix_plugin.view.windows.ChooseRepair;
-import com.ufg.i4soft.angelix_plugin.view.windows.MainWindows;
-
-import java.util.Optional;
 
 public class run extends AnAction {
 
@@ -35,17 +30,8 @@ public class run extends AnAction {
 
         setProject();
 
-        Optional<String> pathOptional = Optional.ofNullable(collectPath());
-
-        if (pathOptional.isPresent()) {
-
-            ChooseRepair.showTypeRepair();
-
-            ProjectData data = new ProjectData();
-            data.setTypeRepair(ChooseRepair.getTyperepair());
-
-            selectRepair(data.getTypeRepair(), pathOptional.get());
-        }
+        ManagePlugin plugin = new ManagePlugin();
+        plugin.start();
     }
 
     private void setProject() {
@@ -53,28 +39,4 @@ public class run extends AnAction {
         Project project = event.getData(PlatformDataKeys.PROJECT);
         ProjectData.setProject(project);
     }
-
-    private void selectRepair(String repair, String path) {
-
-        switch (repair) {
-
-            case "angelix":
-                ManageAngelix angelix = new ManageAngelix();
-                angelix.runAngelix(path);
-                break;
-
-            case "genprog":
-                Messages.showMessageDialog(ProjectData.getProject(), "Funcionalidade para " + repair + " não implementada :(", "Não É Possivel Executar", Messages.getWarningIcon());
-                break;
-
-            default:
-                Messages.showMessageDialog("escolha de ferramenta inválida", "Ferramenta De Reparo Inválido", Messages.getWarningIcon());
-        }
-    }
-
-    private String collectPath() {
-
-        return MainWindows.viewChooseFile();
-    }
-
 }

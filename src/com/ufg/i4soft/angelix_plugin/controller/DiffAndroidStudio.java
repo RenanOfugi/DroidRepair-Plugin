@@ -6,7 +6,7 @@ public class DiffAndroidStudio {
 
         ExecuteShell shell = new ExecuteShell();
 
-        String command = "./" + caminho_androidStudio + arquivo_antes + arquivo_depois;
+        String command = "./" + caminho_androidStudio + " diff " + arquivo_antes + arquivo_depois;
 
         shell.executeCommand(command);
     }

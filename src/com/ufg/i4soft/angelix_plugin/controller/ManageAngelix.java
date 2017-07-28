@@ -1,12 +1,13 @@
 package com.ufg.i4soft.angelix_plugin.controller;
 
+import com.ufg.i4soft.angelix_plugin.model.FilterData;
 import com.ufg.i4soft.angelix_plugin.view.windows.MainWindows;
 
 import java.util.ArrayList;
 
-public class ManageAngelix {
+class ManageAngelix {
 
-    public void runAngelix(String path){
+    void runAngelix(String path){
 
         ArrayList<String> args = collectParameters(path);
 
@@ -16,19 +17,28 @@ public class ManageAngelix {
     private ArrayList<String> collectParameters(String path){
 
         ArrayList<String> parameters = new ArrayList<>();
+        String[] subPathes = new String[3];
+        boolean file_valid = false;
 
         if (path != null) {
 
             FilterData filterData = new FilterData();
-            String[] subPathes = filterData.splitPath(path);
-            parameters.add(subPathes[0]);
-            parameters.add(subPathes[1]);
+            subPathes = filterData.splitPath(path);
+            file_valid = filterData.verifyExtensionFile(subPathes[1]);
+
+        } else {
+            parameters.add(null);
+        }
+
+        if (file_valid){
+
+            parameters.add(subPathes[0]); // Diretório sem o arquivo
+            parameters.add(subPathes[1]); // Arquivo a ser executado
 
             String outros_paramentros = MainWindows.viewInput();
             parameters.add(outros_paramentros);
-
         } else {
-            parameters.add("");
+            parameters.add(null);
         }
 
         return parameters;
