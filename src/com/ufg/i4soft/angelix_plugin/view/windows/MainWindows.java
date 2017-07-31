@@ -10,11 +10,11 @@ import com.ufg.i4soft.angelix_plugin.model.ProjectData;
 
 public class MainWindows {
 
-    public static String viewChooseFile() {
+    public static String viewChooseFile(String title, String description) {
 
         final FileChooserDescriptor descriptor = FileChooserDescriptorFactory.createSingleFileDescriptor();
-        descriptor.setTitle("Selecione O Diretório Do Arquivo");
-        descriptor.setDescription("Selecione o arquivo que deseja submeter à execução do angelix");
+        descriptor.setTitle(title);
+        descriptor.setDescription(description);
 
         VirtualFile file = FileChooser.chooseFile(descriptor, ProjectData.getProject(), null);
 

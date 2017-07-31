@@ -12,7 +12,7 @@ class ExecuteShell {
 
     private static final Logger log = Logger.getLogger(ExecuteShell.class.getName());
 
-    void executeCommand(String command) {
+    String executeCommand(String command) {
 
         final ArrayList<String> commands = new ArrayList<>();
         commands.add("/bin/bash");
@@ -20,6 +20,8 @@ class ExecuteShell {
         commands.add(command);
 
         BufferedReader reader = null;
+
+        String lastLineText = null;
 
         try {
 
@@ -34,6 +36,7 @@ class ExecuteShell {
 
             while ((line = reader.readLine()) != null){
                 System.out.println(line);
+                lastLineText = line;
             }
 
         } catch (IOException e) {
@@ -44,6 +47,8 @@ class ExecuteShell {
         }finally {
             secureClose(reader);
         }
+
+        return lastLineText;
     }
 
     private void secureClose(final Closeable resource) {

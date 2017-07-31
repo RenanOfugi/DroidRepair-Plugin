@@ -26,7 +26,7 @@ public class ManagePlugin {
 
     private String collectPath() {
 
-        return MainWindows.viewChooseFile();
+        return MainWindows.viewChooseFile("Selecione O Diretório Do Arquivo", "Selecione o arquivo que deseja submeter à execução do angelix");
     }
 
     private void selectRepair(String repair, String path) {

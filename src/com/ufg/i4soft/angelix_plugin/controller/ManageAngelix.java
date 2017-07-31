@@ -24,19 +24,21 @@ class ManageAngelix {
 
             FilterData filterData = new FilterData();
             subPathes = filterData.splitPath(path);
-            file_valid = filterData.verifyExtensionFile(subPathes[1]);
 
-        } else {
-            parameters.add(null);
+            String[] extensionValid = {".java", ".c"};
+
+            file_valid = filterData.verifyExtensionFile(subPathes[1], extensionValid);
+
         }
 
         if (file_valid){
 
-            parameters.add(subPathes[0]); // Diretório sem o arquivo
+            parameters.add(subPathes[0]); // Diretório: sem o arquivo
             parameters.add(subPathes[1]); // Arquivo a ser executado
 
             String outros_paramentros = MainWindows.viewInput();
             parameters.add(outros_paramentros);
+
         } else {
             parameters.add(null);
         }
@@ -65,7 +67,13 @@ class ManageAngelix {
 
         String command = "angelix " + args.get(0) + " " + args.get(1) + " " + args.get(2);
 
-        shell.executeCommand(command);
+        String lastline = shell.executeCommand(command);
+
+        if (lastline.equals("SUCCESS")){
+
+            DiffAndroidStudio diff = new DiffAndroidStudio();
+            diff.openDiffFile(""); //TODO: pensar em como pegar o path do patch
+        }
 
     }
 

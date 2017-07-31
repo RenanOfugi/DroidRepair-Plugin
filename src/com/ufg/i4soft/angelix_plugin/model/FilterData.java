@@ -30,9 +30,8 @@ public class FilterData {
         return subPath;
     }
 
-    public boolean verifyExtensionFile(String file){
+    public boolean verifyExtensionFile(String file, String[] extensionValid){
 
-        String[] extensionValid = {".java", ".c"};
         boolean valid;
 
         for (String extension:extensionValid) {
