@@ -6,7 +6,7 @@ public class ProjectData {
 
     private static Project project;
     private String typeRepair;
-    private String path_file_test;
+    private static String path_of_patch;
 
     public static Project getProject() {
         return project;
@@ -24,11 +24,11 @@ public class ProjectData {
         this.typeRepair = typeRepair;
     }
 
-    public String getPath_file_test() {
-        return path_file_test;
+    public static String getPath_of_patch() {
+        return path_of_patch;
     }
 
-    public void setPath_file_test(String path_file_test) {
-        this.path_file_test = path_file_test;
+    public static void setPath_of_patch(String path_of_patch) {
+        ProjectData.path_of_patch = path_of_patch;
     }
 }

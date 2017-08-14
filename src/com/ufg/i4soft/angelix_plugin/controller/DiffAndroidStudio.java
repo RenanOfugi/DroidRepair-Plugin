@@ -2,6 +2,7 @@ package com.ufg.i4soft.angelix_plugin.controller;
 
 import com.ufg.i4soft.angelix_plugin.excecoes.ArquivoNaoAbre;
 import com.ufg.i4soft.angelix_plugin.model.FilterData;
+import com.ufg.i4soft.angelix_plugin.model.ProjectData;
 import com.ufg.i4soft.angelix_plugin.view.windows.MainWindows;
 
 import java.io.File;
@@ -24,7 +25,8 @@ public class DiffAndroidStudio {
 
     private String getPathAndroidStudio(){
 
-        String path = MainWindows.viewChooseFile("Diretorio Android Studio", "Selecione a pasta bin do Android Studio");
+        MainWindows windows = new MainWindows();
+        String path = windows.viewChooseFile("Diretorio Android Studio", "Selecione a pasta bin do Android Studio");
 
         String[] fileValid = {"studio.sh"};
 
@@ -39,7 +41,49 @@ public class DiffAndroidStudio {
         }
     }
 
-    public void openDiffFile(String path){
+    void searchDiffFile(){
+
+        File baseFolder = new File(ProjectData.getPath_of_patch());
+
+        File[] files = baseFolder.listFiles();
+
+        File file_lastPatch = null;
+
+        if (files != null){
+
+            file_lastPatch = searchLastFileModified(files);
+        }
+
+        if (file_lastPatch != null){
+
+            openDiffFile(file_lastPatch.getPath());
+        }
+    }
+
+    private File searchLastFileModified(File[] files){
+
+        Long lastFile_date = 0L;
+        Long currentFile_date = 0L;
+        File lastPatch = null;
+
+        for (File file: files) {
+
+            if (file.getPath().endsWith(".patch")){
+
+                currentFile_date = file.lastModified();
+            }
+
+            if(currentFile_date > lastFile_date){
+
+                lastFile_date = currentFile_date;
+                lastPatch = file;
+            }
+        }
+
+        return lastPatch;
+    }
+
+    private void openDiffFile(String path){
 
         try {
 

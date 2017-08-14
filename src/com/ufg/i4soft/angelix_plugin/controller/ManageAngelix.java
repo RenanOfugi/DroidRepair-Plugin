@@ -1,20 +1,22 @@
 package com.ufg.i4soft.angelix_plugin.controller;
 
+import com.ufg.i4soft.angelix_plugin.contract.RepairTool;
 import com.ufg.i4soft.angelix_plugin.model.FilterData;
+import com.ufg.i4soft.angelix_plugin.model.ProjectData;
 import com.ufg.i4soft.angelix_plugin.view.windows.MainWindows;
 
 import java.util.ArrayList;
 
-class ManageAngelix {
+class ManageAngelix implements RepairTool{
 
-    void runAngelix(String path){
+    public void startRepairTool(String path){
 
         ArrayList<String> args = collectParameters(path);
 
         verifyInputs(args);
     }
 
-    private ArrayList<String> collectParameters(String path){
+    public ArrayList<String> collectParameters(String path){
 
         ArrayList<String> parameters = new ArrayList<>();
         String[] subPathes = new String[3];
@@ -33,6 +35,8 @@ class ManageAngelix {
 
         if (file_valid){
 
+            setPathofPatch(subPathes[0]); //Caminho onde sera gerado o patch
+
             parameters.add(subPathes[0]); // Diretório: sem o arquivo
             parameters.add(subPathes[1]); // Arquivo a ser executado
 
@@ -46,7 +50,7 @@ class ManageAngelix {
         return parameters;
     }
 
-    private void verifyInputs(ArrayList<String> args) {
+    public void verifyInputs(ArrayList<String> args) {
 
         boolean parametrosNaoVazios = true;
 
@@ -57,11 +61,11 @@ class ManageAngelix {
         }
 
         if (parametrosNaoVazios) {
-            executeAngelix(args);
+            executeRepairTool(args);
         }
     }
 
-    private void executeAngelix(ArrayList<String> args) {
+    public void executeRepairTool(ArrayList<String> args) {
 
         ExecuteShell shell = new ExecuteShell();
 
@@ -72,9 +76,14 @@ class ManageAngelix {
         if (lastline.equals("SUCCESS")){
 
             DiffAndroidStudio diff = new DiffAndroidStudio();
-            diff.openDiffFile(""); //TODO: pensar em como pegar o path do patch
+            diff.searchDiffFile();
         }
 
+    }
+
+    private void setPathofPatch(String path){
+
+        ProjectData.setPath_of_patch(path);
     }
 
 }

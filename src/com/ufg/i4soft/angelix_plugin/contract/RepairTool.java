@@ -1,4 +1,14 @@
 package com.ufg.i4soft.angelix_plugin.contract;
 
+import java.util.ArrayList;
+
 public interface RepairTool {
+
+    void startRepairTool(String path);
+
+    ArrayList<String> collectParameters(String path);
+
+    void verifyInputs(ArrayList<String> args);
+
+    void executeRepairTool(ArrayList<String> args);
 }

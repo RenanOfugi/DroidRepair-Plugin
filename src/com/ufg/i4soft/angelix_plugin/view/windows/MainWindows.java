@@ -10,7 +10,7 @@ import com.ufg.i4soft.angelix_plugin.model.ProjectData;
 
 public class MainWindows {
 
-    public static String viewChooseFile(String title, String description) {
+    public String viewChooseFile(String title, String description) {
 
         final FileChooserDescriptor descriptor = FileChooserDescriptorFactory.createSingleFileDescriptor();
         descriptor.setTitle(title);
