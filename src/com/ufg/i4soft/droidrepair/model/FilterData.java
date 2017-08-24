@@ -1,8 +1,8 @@
-package com.ufg.i4soft.angelix_plugin.model;
+package com.ufg.i4soft.droidrepair.model;
 
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.ufg.i4soft.angelix_plugin.enums.FileExtensions;
+import com.ufg.i4soft.droidrepair.enums.FileExtensions;
 
 public class FilterData {
 

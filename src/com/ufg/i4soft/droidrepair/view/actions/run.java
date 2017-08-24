@@ -1,11 +1,11 @@
-package com.ufg.i4soft.angelix_plugin.view.actions;
+package com.ufg.i4soft.droidrepair.view.actions;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.project.Project;
-import com.ufg.i4soft.angelix_plugin.controller.ManagePlugin;
-import com.ufg.i4soft.angelix_plugin.model.ProjectData;
+import com.ufg.i4soft.droidrepair.controller.ManagePlugin;
+import com.ufg.i4soft.droidrepair.model.ProjectData;
 
 public class run extends AnAction {
 

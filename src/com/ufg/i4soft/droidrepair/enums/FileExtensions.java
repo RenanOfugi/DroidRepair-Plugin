@@ -1,4 +1,4 @@
-package com.ufg.i4soft.angelix_plugin.enums;
+package com.ufg.i4soft.droidrepair.enums;
 
 public enum FileExtensions {
 

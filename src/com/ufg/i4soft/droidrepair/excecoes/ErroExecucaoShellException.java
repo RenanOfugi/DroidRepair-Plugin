@@ -1,4 +1,4 @@
-package com.ufg.i4soft.angelix_plugin.excecoes;
+package com.ufg.i4soft.droidrepair.excecoes;
 
 public class ErroExecucaoShellException extends RuntimeException {
 

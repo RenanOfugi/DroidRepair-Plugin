@@ -1,8 +1,7 @@
-package com.ufg.i4soft.angelix_plugin.controller;
+package com.ufg.i4soft.droidrepair.controller;
 
 import com.intellij.openapi.ui.Messages;
-import com.ufg.i4soft.angelix_plugin.excecoes.ErroExecucaoShellException;
-import com.ufg.i4soft.angelix_plugin.excecoes.FalhaEsperaException;
+import com.ufg.i4soft.droidrepair.excecoes.ErroExecucaoShellException;
 
 import java.io.*;
 import java.util.ArrayList;

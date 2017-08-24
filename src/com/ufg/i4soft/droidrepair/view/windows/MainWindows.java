@@ -1,12 +1,12 @@
-package com.ufg.i4soft.angelix_plugin.view.windows;
+package com.ufg.i4soft.droidrepair.view.windows;
 
 import com.intellij.openapi.fileChooser.FileChooser;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.ufg.i4soft.angelix_plugin.model.FilterData;
-import com.ufg.i4soft.angelix_plugin.model.ProjectData;
+import com.ufg.i4soft.droidrepair.model.FilterData;
+import com.ufg.i4soft.droidrepair.model.ProjectData;
 
 public class MainWindows {
 

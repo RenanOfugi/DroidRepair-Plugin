@@ -1,9 +1,9 @@
-package com.ufg.i4soft.angelix_plugin.controller;
+package com.ufg.i4soft.droidrepair.controller;
 
-import com.ufg.i4soft.angelix_plugin.contract.RepairTool;
-import com.ufg.i4soft.angelix_plugin.model.FilterData;
-import com.ufg.i4soft.angelix_plugin.model.ProjectData;
-import com.ufg.i4soft.angelix_plugin.view.windows.MainWindows;
+import com.ufg.i4soft.droidrepair.contract.RepairTool;
+import com.ufg.i4soft.droidrepair.model.FilterData;
+import com.ufg.i4soft.droidrepair.model.ProjectData;
+import com.ufg.i4soft.droidrepair.view.windows.MainWindows;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.ufg.i4soft.angelix_plugin.contract;
+package com.ufg.i4soft.droidrepair.contract;
 
 import java.util.ArrayList;
 

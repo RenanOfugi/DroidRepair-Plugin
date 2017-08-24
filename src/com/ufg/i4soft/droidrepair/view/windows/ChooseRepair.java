@@ -1,6 +1,4 @@
-package com.ufg.i4soft.angelix_plugin.view.windows;
-
-import com.ufg.i4soft.angelix_plugin.model.ProjectData;
+package com.ufg.i4soft.droidrepair.view.windows;
 
 import javax.swing.*;
 import java.awt.*;

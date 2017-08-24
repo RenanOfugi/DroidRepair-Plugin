@@ -1,10 +1,10 @@
-package com.ufg.i4soft.angelix_plugin.controller;
+package com.ufg.i4soft.droidrepair.controller;
 
 import com.intellij.openapi.ui.Messages;
-import com.ufg.i4soft.angelix_plugin.model.FilterData;
-import com.ufg.i4soft.angelix_plugin.model.ProjectData;
-import com.ufg.i4soft.angelix_plugin.view.windows.ChooseRepair;
-import com.ufg.i4soft.angelix_plugin.view.windows.MainWindows;
+import com.ufg.i4soft.droidrepair.model.FilterData;
+import com.ufg.i4soft.droidrepair.model.ProjectData;
+import com.ufg.i4soft.droidrepair.view.windows.ChooseRepair;
+import com.ufg.i4soft.droidrepair.view.windows.MainWindows;
 
 import java.util.Optional;
 

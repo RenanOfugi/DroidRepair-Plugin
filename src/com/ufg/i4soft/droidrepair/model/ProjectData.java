@@ -1,4 +1,4 @@
-package com.ufg.i4soft.angelix_plugin.model;
+package com.ufg.i4soft.droidrepair.model;
 
 import com.intellij.openapi.project.Project;
 
