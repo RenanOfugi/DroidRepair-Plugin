@@ -28,11 +28,11 @@ public class DiffAndroidStudio {
         MainWindows windows = new MainWindows();
         String path = windows.viewChooseFile("Diretorio Android Studio", "Selecione a pasta bin do Android Studio");
 
-        String[] fileValid = {"studio.sh"};
+        //String[] fileValid = {"studio.sh"};
 
         FilterData filterData = new FilterData();
 
-        boolean valid = filterData.verifyExtensionFile(path, fileValid);
+        boolean valid = filterData.verifyExtensionFile(path);
 
         if (valid){
             return path;

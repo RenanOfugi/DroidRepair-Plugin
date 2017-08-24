@@ -2,6 +2,7 @@ package com.ufg.i4soft.angelix_plugin.model;
 
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.ufg.i4soft.angelix_plugin.enums.FileExtensions;
 
 public class FilterData {
 
@@ -30,13 +31,13 @@ public class FilterData {
         return subPath;
     }
 
-    public boolean verifyExtensionFile(String file, String[] extensionValid){
+    public boolean verifyExtensionFile(String file){
 
         boolean valid;
 
-        for (String extension:extensionValid) {
+        for (FileExtensions extension: FileExtensions.values()) {
 
-            valid = file.toLowerCase().contains(extension.toLowerCase());
+            valid = file.toLowerCase().endsWith(extension.getValue().toLowerCase());
 
             if(valid){
                 return true;

@@ -19,10 +19,14 @@ class ManageAngelix implements RepairTool{
     public ArrayList<String> collectParameters(String path){
 
         ArrayList<String> parameters = new ArrayList<>();
-        String[] subPathes = new String[3];
-        boolean file_valid = false;
+        String[] subPathes;
 
-        if (path != null) {
+        FilterData filterData = new FilterData();
+
+        subPathes = filterData.splitPath(path);
+        //boolean file_valid = false;
+
+        /*if (path != null) {
 
             FilterData filterData = new FilterData();
             subPathes = filterData.splitPath(path);
@@ -31,9 +35,9 @@ class ManageAngelix implements RepairTool{
 
             file_valid = filterData.verifyExtensionFile(subPathes[1], extensionValid);
 
-        }
+        }*/
 
-        if (file_valid){
+        if (/*file_valid*/path != null){
 
             setPathofPatch(subPathes[0]); //Caminho onde sera gerado o patch
 

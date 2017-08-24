@@ -1,6 +1,7 @@
 package com.ufg.i4soft.angelix_plugin.controller;
 
 import com.intellij.openapi.ui.Messages;
+import com.ufg.i4soft.angelix_plugin.model.FilterData;
 import com.ufg.i4soft.angelix_plugin.model.ProjectData;
 import com.ufg.i4soft.angelix_plugin.view.windows.ChooseRepair;
 import com.ufg.i4soft.angelix_plugin.view.windows.MainWindows;
@@ -13,7 +14,12 @@ public class ManagePlugin {
 
         Optional<String> pathOptional = Optional.ofNullable(collectPath());
 
-        if (pathOptional.isPresent()) {
+        boolean file_valid;
+
+        FilterData filterData = new FilterData();
+        file_valid = filterData.verifyExtensionFile(pathOptional.get());
+
+        if (file_valid) {
 
             ChooseRepair.showTypeRepair();
 
