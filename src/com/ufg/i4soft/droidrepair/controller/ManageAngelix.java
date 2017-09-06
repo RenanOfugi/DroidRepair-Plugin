@@ -24,20 +24,8 @@ class ManageAngelix implements RepairTool{
         FilterData filterData = new FilterData();
 
         subPathes = filterData.splitPath(path);
-        //boolean file_valid = false;
 
-        /*if (path != null) {
-
-            FilterData filterData = new FilterData();
-            subPathes = filterData.splitPath(path);
-
-            String[] extensionValid = {".java", ".c"};
-
-            file_valid = filterData.verifyExtensionFile(subPathes[1], extensionValid);
-
-        }*/
-
-        if (/*file_valid*/path != null){
+        if (path != null){
 
             setPathofPatch(subPathes[0]); //Caminho onde sera gerado o patch
 
@@ -73,11 +61,11 @@ class ManageAngelix implements RepairTool{
 
         ExecuteShell shell = new ExecuteShell();
 
-        String command = "angelix " + args.get(0) + " " + args.get(1) + " " + args.get(2);
+        String command = "sudo angelix " + args.get(0) + " " + args.get(1) + " " + args.get(2);
 
         String lastline = shell.executeCommand(command);
 
-        if (lastline.equals("SUCCESS")){
+        if (lastline != null && lastline.equals("SUCCESS")){
 
             DiffAndroidStudio diff = new DiffAndroidStudio();
             diff.searchDiffFile();
