@@ -63,9 +63,9 @@ class ManageAngelix implements RepairTool{
 
         String command = "sudo angelix " + args.get(0) + " " + args.get(1) + " " + args.get(2);
 
-        String lastline = shell.executeCommand(command);
+        String statusline = shell.executeCommand(command);
 
-        if (lastline != null && lastline.equals("SUCCESS")){
+        if (statusline.equals("sucess")){
 
             DiffAndroidStudio diff = new DiffAndroidStudio();
             diff.searchDiffFile();
