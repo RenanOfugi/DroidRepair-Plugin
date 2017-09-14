@@ -1,13 +1,15 @@
-package com.ufg.i4soft.droidrepair.controller;
+package com.ufg.i4soft.droidrepair.controller.Angelix;
 
 import com.ufg.i4soft.droidrepair.contract.RepairTool;
+import com.ufg.i4soft.droidrepair.controller.DiffAndroidStudio;
+import com.ufg.i4soft.droidrepair.controller.*;
 import com.ufg.i4soft.droidrepair.model.FilterData;
 import com.ufg.i4soft.droidrepair.model.ProjectData;
 import com.ufg.i4soft.droidrepair.view.windows.MainWindows;
 
 import java.util.ArrayList;
 
-class ManageAngelix implements RepairTool{
+public class ManageAngelix implements RepairTool{
 
     public void startRepairTool(String path){
 

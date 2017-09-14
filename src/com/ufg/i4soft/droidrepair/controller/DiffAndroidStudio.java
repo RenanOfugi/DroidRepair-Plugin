@@ -41,7 +41,7 @@ public class DiffAndroidStudio {
         }
     }
 
-    void searchDiffFile(){
+    public void searchDiffFile(){
 
         File baseFolder = new File(ProjectData.getPath_of_patch());
 

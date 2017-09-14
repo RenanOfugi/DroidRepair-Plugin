@@ -1,6 +1,7 @@
 package com.ufg.i4soft.droidrepair.controller;
 
 import com.intellij.openapi.ui.Messages;
+import com.ufg.i4soft.droidrepair.controller.Angelix.ManageAngelix;
 import com.ufg.i4soft.droidrepair.model.FilterData;
 import com.ufg.i4soft.droidrepair.model.ProjectData;
 import com.ufg.i4soft.droidrepair.view.windows.ChooseRepair;

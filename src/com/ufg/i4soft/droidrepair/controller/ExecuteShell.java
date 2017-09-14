@@ -7,11 +7,13 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-class ExecuteShell {
+public class ExecuteShell {
 
     private static final Logger log = Logger.getLogger(ExecuteShell.class.getName());
 
-    void executeCommand(String command) {
+    public String executeCommand(String command) {
+
+        String statusline = "";
 
         try {
 
@@ -23,6 +25,14 @@ class ExecuteShell {
 
             while ((line = in.readLine()) != null) {
                 System.out.println(line);
+
+                if (line.toLowerCase().contains("sucess")){
+
+                    statusline = "sucess";
+                } else if (line.toLowerCase().contains("fail")){
+
+                    statusline = "fail";
+                }
             }
 
             BufferedReader stderr = new BufferedReader(new InputStreamReader(p.getErrorStream()));
@@ -38,6 +48,7 @@ class ExecuteShell {
 
         }
 
+        return statusline;
     }
 
 }
