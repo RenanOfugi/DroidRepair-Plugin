@@ -9,11 +9,15 @@ public class ExecuteShellTest {
     @Test
     public void executeCommand() throws Exception {
 
-        String command = "gksudo apt-get update";
+        String command = "cd ~/angelix;" + //entrar no diretório para acessar o arquivo "activate"
+                ". activate;" + //executar o arquivo "activate"
+                "cd ~/angelix/test/enum;" + //mudar o diretorio para o local onde será gerado o patch
+                "~/angelix/src/tools/angelix ~/angelix/test/enum/src " + //execução do angelix de fato
+                "test.c ~/angelix/test/enum/oracle 1 2 3 --assert ~/angelix/test/enum/assert.json";
 
         ExecuteShell shell = new ExecuteShell();
-        String teste = shell.executeCommand(command);
-        System.out.println("last line: " + teste);
+        shell.executeCommand(command);
+
     }
 
 }
