@@ -63,7 +63,11 @@ public class ManageAngelix implements RepairTool{
 
         ExecuteShell shell = new ExecuteShell();
 
-        String command = "sudo angelix " + args.get(0) + " " + args.get(1) + " " + args.get(2);
+        String command = "cd ~/angelix;" +
+                ". activate;" +
+                "cd " + args.get(0) + ";" + //Mudar para diretório onde será gerado o patch
+                "~/angelix/src/tools/angelix " + //executar o angelix
+                args.get(0) + " " + args.get(1) + " " + args.get(2); //parametros para o angelix
 
         String statusline = shell.executeCommand(command);
 
