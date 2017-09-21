@@ -25,8 +25,8 @@ public class FilterData {
         int local_split = path.lastIndexOf("/");
 
         String[] subPath = new String[2];
-        subPath[0] = path.substring(0, local_split);
-        subPath[1] = path.substring(local_split + 1, path.length());
+        subPath[0] = path.substring(0, local_split); // Parte representando o path sem o arquivo
+        subPath[1] = path.substring(local_split + 1, path.length()); //nome do arquivo
 
         return subPath;
     }

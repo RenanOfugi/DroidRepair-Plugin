@@ -69,12 +69,18 @@ public class ManageAngelix implements RepairTool{
                 "~/angelix/src/tools/angelix " + //executar o angelix
                 args.get(0) + " " + args.get(1) + " " + args.get(2); //parametros para o angelix
 
+        FileManipulation fileManipulation = new FileManipulation();
+        fileManipulation.deleteAllPatches();
+
         String statusline = shell.executeCommand(command);
 
         if (statusline.equals("sucess")){
 
+            fileManipulation.searchFilePatch();
+            fileManipulation.deleteOldLines();
+
             DiffAndroidStudio diff = new DiffAndroidStudio();
-            diff.searchDiffFile();
+            diff.showDiff();
         }
 
     }
