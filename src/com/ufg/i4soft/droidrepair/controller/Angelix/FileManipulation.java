@@ -61,7 +61,7 @@ public class FileManipulation {
         }
     }
 
-    public void deleteAllPatches() {
+    void deleteAllPatches() {
 
         File file = new File(ProjectData.getPath_of_patch());
         File[] files = file.listFiles();
@@ -72,7 +72,7 @@ public class FileManipulation {
 
                 if (currentfile.getPath().endsWith(".patch")) {
 
-                    currentfile.delete();
+                   currentfile.delete();
                 }
             }
         }
