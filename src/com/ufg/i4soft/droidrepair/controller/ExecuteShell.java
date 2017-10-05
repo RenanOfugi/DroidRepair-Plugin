@@ -26,9 +26,9 @@ public class ExecuteShell {
             while ((line = in.readLine()) != null) {
                 System.out.println(line);
 
-                if (line.toLowerCase().contains("sucess")){
+                if (line.toLowerCase().contains("success")){
 
-                    statusline = "sucess";
+                    statusline = "success";
                 } else if (line.toLowerCase().contains("fail")){
 
                     statusline = "fail";
