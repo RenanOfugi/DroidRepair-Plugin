@@ -7,12 +7,12 @@ import com.ufg.i4soft.droidrepair.model.ProjectData;
 
 import java.io.*;
 
-public class FileManipulation {
+class FileManipulation {
 
-    public void deleteOldLines() {
+    void deleteOldLines() {
 
-        File file = new File(ProjectData.getPath_of_patch() + ProjectData.getName_filepatch());
-        File file2 = new File(ProjectData.getPath_of_patch() + "patchPuro.txt");
+        File file = new File(ProjectData.getPath_of_patch() + "/" + ProjectData.getName_filepatch());
+        File file2 = new File(ProjectData.getPath_of_patch() + "/" + "patchPuro.txt");
 
         try {
 
@@ -41,7 +41,7 @@ public class FileManipulation {
         }
     }
 
-    public void searchFilePatch() {
+    void searchFilePatch() {
 
         File file = new File(ProjectData.getPath_of_patch());
         File[] files = file.listFiles();
@@ -54,8 +54,8 @@ public class FileManipulation {
 
                 if (currentfile.getPath().endsWith(".patch")) {
 
-                    String[] subpaths = filterData.splitPath(file.getPath());
-                    ProjectData.setName_filepatch(subpaths[1]);
+                    //String[] subpaths = filterData.splitPath(file.getna);
+                    ProjectData.setName_filepatch(currentfile.getName());
                 }
             }
         }

@@ -29,13 +29,13 @@ public class ManageAngelix implements RepairTool{
 
         if (path != null){
 
-            setPathofPatch(subPathes[0]); //Caminho onde sera gerado o patch
+            setPathofPatch(subPathes[0]); //Caminho onde sera gerado o patch, sem o ultimo diretorio
 
             parameters.add(subPathes[0]); // Diretório: sem o arquivo
             parameters.add(subPathes[1]); // Arquivo a ser executado
 
             String outros_paramentros = MainWindows.viewInput();
-            parameters.add(outros_paramentros);
+            parameters.add(outros_paramentros); //restante dos parametros para serem executados
 
         } else {
             parameters.add(null);
@@ -65,16 +65,15 @@ public class ManageAngelix implements RepairTool{
 
         String command = "cd ~/angelix;" +
                 ". activate;" +
-                "cd " + args.get(0) + ";" + //Mudar para diretório onde será gerado o patch
-                "~/angelix/src/tools/angelix " + //executar o angelix
-                args.get(0) + " " + args.get(1) + " " + args.get(2); //parametros para o angelix
+                "cd " + ProjectData.getPath_of_patch() + ";" + //Mudar para diretório onde será gerado o patch
+                "angelix " + args.get(0) + " " + args.get(1) + " " + args.get(2);
 
         FileManipulation fileManipulation = new FileManipulation();
         fileManipulation.deleteAllPatches();
 
         String statusline = shell.executeCommand(command);
 
-        if (statusline.equals("sucess")){
+        if (statusline.equals("success")){
 
             fileManipulation.searchFilePatch();
             fileManipulation.deleteOldLines();
@@ -87,7 +86,9 @@ public class ManageAngelix implements RepairTool{
 
     private void setPathofPatch(String path){
 
-        ProjectData.setPath_of_patch(path);
+        FilterData filterData = new FilterData();
+        String[] path_patch = filterData.splitPath(path);
+        ProjectData.setPath_of_patch(path_patch[0]);
     }
 
 }
