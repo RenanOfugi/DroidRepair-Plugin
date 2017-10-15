@@ -69,14 +69,14 @@ public class ManageAngelix implements RepairTool{
                 "angelix " + args.get(0) + " " + args.get(1) + " " + args.get(2);
 
         FileManipulation fileManipulation = new FileManipulation();
-        fileManipulation.deleteAllPatches();
+        boolean deleted_allfiles = fileManipulation.deleteAllPatches(ProjectData.getPath_of_patch()); //deleta todos os arquivos .patch do diretório escolhido
 
         String statusline = shell.executeCommand(command);
 
-        if (statusline.equals("success")){
+        if (statusline.equals("sucess") && deleted_allfiles){
 
-            fileManipulation.searchFilePatch();
-            fileManipulation.deleteOldLines();
+            fileManipulation.searchFilePatch(ProjectData.getPath_of_patch()); //busca o arquivo .patch gerado
+            fileManipulation.deleteOldLines(ProjectData.getPath_of_patch(), ProjectData.getName_filepatch(),ProjectData.getPath_of_patch(),"patchPuro.txt"); // gera um novo arquivo com o patch sem nenhuma linha de código antigo modificado
 
             DiffAndroidStudio diff = new DiffAndroidStudio();
             diff.showDiff();

@@ -15,7 +15,7 @@ public class DiffAndroidStudio {
         String path_androidstudio = getAndroidStudioExecutable();
 
         String command = path_androidstudio + " " +
-                ProjectData.getPath_of_patch() + "/" + ProjectData.getName_filepatch() +
+                ProjectData.getPath_of_patch() + "/" + ProjectData.getName_filepatch() + " " +
                 ProjectData.getPath_of_patch() + "/" + "patchPuro.txt";
 
         ExecuteShell shell = new ExecuteShell();

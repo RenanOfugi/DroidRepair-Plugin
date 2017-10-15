@@ -9,26 +9,37 @@ import java.io.*;
 
 class FileManipulation {
 
-    void deleteOldLines() {
+    void deleteOldLines(String path_read, String file_patch, String path_writter, String file_generate) {
 
-        File file = new File(ProjectData.getPath_of_patch() + "/" + ProjectData.getName_filepatch());
-        File file2 = new File(ProjectData.getPath_of_patch() + "/" + "patchPuro.txt");
+        File file = new File(path_read, file_patch);
+        File file2 = new File(path_writter, file_generate);
 
         try {
 
-            FileReader fileReader = new FileReader(file);
-            BufferedReader reader = new BufferedReader(fileReader);
+            boolean created_file = file2.createNewFile();
 
-            FileWriter fileWriter = new FileWriter(file2);
-            BufferedWriter writer = new BufferedWriter(fileWriter);
+            if (created_file){
 
-            String line;
+                FileReader fileReader = new FileReader(file);
+                BufferedReader reader = new BufferedReader(fileReader);
 
-            while ((line = reader.readLine()) != null) {
+                FileWriter file_writer = new FileWriter(file2);
+                PrintWriter printWriter = new PrintWriter(file_writer);
 
-                if (!line.startsWith("-") || !line.startsWith("@@")) {
-                    writer.write(line);
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+
+                    if (!line.toLowerCase().startsWith("@@") && !line.toLowerCase().startsWith("-")) {
+
+                        printWriter.println(line);
+                    }
                 }
+
+                fileReader.close();
+                reader.close();
+                printWriter.flush();
+                printWriter.close();
             }
 
         } catch (FileNotFoundException e) {
@@ -41,9 +52,9 @@ class FileManipulation {
         }
     }
 
-    void searchFilePatch() {
+    void searchFilePatch(String path) {
 
-        File file = new File(ProjectData.getPath_of_patch());
+        File file = new File(path);
         File[] files = file.listFiles();
 
         FilterData filterData = new FilterData();
@@ -61,10 +72,12 @@ class FileManipulation {
         }
     }
 
-    void deleteAllPatches() {
+    boolean deleteAllPatches(String path) {
 
-        File file = new File(ProjectData.getPath_of_patch());
+        File file = new File(path);
         File[] files = file.listFiles();
+
+        boolean delete = false;
 
         if (files != null) {
 
@@ -72,10 +85,11 @@ class FileManipulation {
 
                 if (currentfile.getPath().endsWith(".patch")) {
 
-                   currentfile.delete();
+                    delete = currentfile.delete();
                 }
             }
         }
 
+        return delete;
     }
 }
