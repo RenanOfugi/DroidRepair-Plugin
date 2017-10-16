@@ -87,6 +87,9 @@ public class ManageAngelix implements RepairTool{
             DiffAndroidStudio diff = new DiffAndroidStudio();
             diff.showDiff();
 
+        } else {
+
+            Messages.showMessageDialog("Valores incorretos de parametro", "Parametro Incorreto", Messages.getErrorIcon());
         }
 
     }

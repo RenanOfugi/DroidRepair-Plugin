@@ -44,7 +44,7 @@ class FileManipulation {
                 printWriter.close();
             } else {
 
-                Messages.showMessageDialog("Arquivo pathPuro gerado pelo plugin ja existente","Arquivo Existente", Messages.getErrorIcon());
+                Messages.showMessageDialog("Arquivo pathPuro gerado pelo plugin ja existente","Arquivo Existente", Messages.getInformationIcon());
             }
 
         } catch (FileNotFoundException e) {

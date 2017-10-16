@@ -1,5 +1,6 @@
 package com.ufg.i4soft.droidrepair.controller;
 
+import com.intellij.openapi.ui.Messages;
 import com.ufg.i4soft.droidrepair.excecoes.ArquivoNaoAbre;
 import com.ufg.i4soft.droidrepair.model.FilterData;
 import com.ufg.i4soft.droidrepair.model.ProjectData;
@@ -18,8 +19,14 @@ public class DiffAndroidStudio {
                 ProjectData.getPath_of_patch() + "/" + ProjectData.getName_filepatch() + " " +
                 ProjectData.getPath_of_patch() + "/" + "patchPuro.txt";
 
-        ExecuteShell shell = new ExecuteShell();
-        shell.executeCommand(command);
+        if (path_androidstudio.toLowerCase().endsWith("idea.sh") || path_androidstudio.toLowerCase().endsWith("studio.sh")){
+
+            ExecuteShell shell = new ExecuteShell();
+            shell.executeCommand(command);
+        } else {
+            Messages.showMessageDialog("Selecione o arquivo idea.sh ou studio.sh","Arquivo Incorreto", Messages.getErrorIcon());
+        }
+
     }
 
     private static String getAndroidStudioExecutable(){
