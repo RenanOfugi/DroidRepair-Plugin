@@ -6,6 +6,7 @@ import com.ufg.i4soft.droidrepair.controller.*;
 import com.ufg.i4soft.droidrepair.model.FilterData;
 import com.ufg.i4soft.droidrepair.model.ProjectData;
 import com.ufg.i4soft.droidrepair.view.windows.MainWindows;
+import com.intellij.openapi.ui.Messages;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,12 @@ public class ManageAngelix implements RepairTool{
 
         ArrayList<String> args = collectParameters(path);
 
-        verifyInputs(args);
+        boolean all_param = verifyInputs(args);
+
+        if (all_param){
+
+            executeRepairTool(args);
+        }
     }
 
     public ArrayList<String> collectParameters(String path){
@@ -44,19 +50,19 @@ public class ManageAngelix implements RepairTool{
         return parameters;
     }
 
-    public void verifyInputs(ArrayList<String> args) {
+    public boolean verifyInputs(ArrayList<String> args) {
 
-        boolean parametrosNaoVazios = true;
+        boolean all_param = true;
 
         for (String arg : args) {
-            if (arg == null) {
-                parametrosNaoVazios = false;
+            if (arg == null || arg.equals("")) {
+
+                Messages.showMessageDialog("Ausencia de Parametro", "Angelix Nao Pode Ser Executado", Messages.getErrorIcon());
+                all_param = false;
             }
         }
 
-        if (parametrosNaoVazios) {
-            executeRepairTool(args);
-        }
+        return all_param;
     }
 
     public void executeRepairTool(ArrayList<String> args) {
@@ -73,13 +79,14 @@ public class ManageAngelix implements RepairTool{
 
         String statusline = shell.executeCommand(command);
 
-        if (statusline.equals("sucess") && deleted_allfiles){
+        if (statusline.equals("success") && deleted_allfiles){
 
             fileManipulation.searchFilePatch(ProjectData.getPath_of_patch()); //busca o arquivo .patch gerado
             fileManipulation.deleteOldLines(ProjectData.getPath_of_patch(), ProjectData.getName_filepatch(),ProjectData.getPath_of_patch(),"patchPuro.txt"); // gera um novo arquivo com o patch sem nenhuma linha de código antigo modificado
 
             DiffAndroidStudio diff = new DiffAndroidStudio();
             diff.showDiff();
+
         }
 
     }

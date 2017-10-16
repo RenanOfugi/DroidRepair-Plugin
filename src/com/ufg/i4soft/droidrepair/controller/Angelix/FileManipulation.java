@@ -1,5 +1,6 @@
 package com.ufg.i4soft.droidrepair.controller.Angelix;
 
+import com.intellij.openapi.ui.Messages;
 import com.ufg.i4soft.droidrepair.excecoes.ArquivoNaoEncontrado;
 import com.ufg.i4soft.droidrepair.excecoes.ErroEscritaDados;
 import com.ufg.i4soft.droidrepair.model.FilterData;
@@ -30,8 +31,9 @@ class FileManipulation {
 
                 while ((line = reader.readLine()) != null) {
 
-                    if (!line.toLowerCase().startsWith("@@") && !line.toLowerCase().startsWith("-")) {
+                    if (!line.toLowerCase().startsWith("@@") && !line.toLowerCase().startsWith("-") && !line.toLowerCase().startsWith("+++")) {
 
+                        line = deleteCharacter(line);
                         printWriter.println(line);
                     }
                 }
@@ -40,6 +42,9 @@ class FileManipulation {
                 reader.close();
                 printWriter.flush();
                 printWriter.close();
+            } else {
+
+                Messages.showMessageDialog("Arquivo pathPuro gerado pelo plugin ja existente","Arquivo Existente", Messages.getErrorIcon());
             }
 
         } catch (FileNotFoundException e) {
@@ -52,12 +57,20 @@ class FileManipulation {
         }
     }
 
+    private String deleteCharacter(String line){
+
+        if (line.toLowerCase().startsWith("+")){
+
+            line = line.replaceAll("\\+", " ");
+        }
+
+        return line;
+    }
+
     void searchFilePatch(String path) {
 
         File file = new File(path);
         File[] files = file.listFiles();
-
-        FilterData filterData = new FilterData();
 
         if (files != null) {
 
@@ -65,7 +78,6 @@ class FileManipulation {
 
                 if (currentfile.getPath().endsWith(".patch")) {
 
-                    //String[] subpaths = filterData.splitPath(file.getna);
                     ProjectData.setName_filepatch(currentfile.getName());
                 }
             }

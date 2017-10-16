@@ -25,12 +25,6 @@ public class MainWindows {
 
     public static String viewInput() {
 
-        String args = Messages.showInputDialog(ProjectData.getProject(), "Insira os parâmetros para o Angelix", "Inserção De Parâmetros", Messages.getInformationIcon());
-
-        if (args == null) {
-            Messages.showMessageDialog(ProjectData.getProject(), "Não foi identificado nenhuma entrada de parâmetros", "Parâmetro Inválido", Messages.getWarningIcon());
-        }
-
-        return args;
+        return Messages.showInputDialog(ProjectData.getProject(), "Insira os parâmetros para o Angelix", "Inserção De Parâmetros", Messages.getInformationIcon());
     }
 }
