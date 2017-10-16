@@ -1,11 +1,13 @@
 package com.ufg.i4soft.droidrepair.controller;
 
 import com.intellij.openapi.ui.Messages;
+import com.ufg.i4soft.droidrepair.controller.Angelix.ManageAngelix;
 import com.ufg.i4soft.droidrepair.model.FilterData;
 import com.ufg.i4soft.droidrepair.model.ProjectData;
 import com.ufg.i4soft.droidrepair.view.windows.ChooseRepair;
 import com.ufg.i4soft.droidrepair.view.windows.MainWindows;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 public class ManagePlugin {
@@ -17,16 +19,24 @@ public class ManagePlugin {
         boolean file_valid;
 
         FilterData filterData = new FilterData();
-        file_valid = filterData.verifyExtensionFile(pathOptional.get());
 
-        if (file_valid) {
+        try {
 
-            ChooseRepair.showTypeRepair();
+            file_valid = filterData.verifyExtensionFile(pathOptional.get());
 
-            ProjectData data = new ProjectData();
-            data.setTypeRepair(ChooseRepair.getTyperepair());
+            if (file_valid) {
 
-            selectRepair(data.getTypeRepair(), pathOptional.get());
+                ChooseRepair.showTypeRepair();
+
+                ProjectData data = new ProjectData();
+                data.setTypeRepair(ChooseRepair.getTyperepair());
+
+                selectRepair(data.getTypeRepair(), pathOptional.get());
+            }
+
+        } catch (NoSuchElementException e){
+
+            Messages.showMessageDialog("Arquivo para reparo ausente", "Arquivo Ausente", Messages.getInformationIcon());
         }
     }
 

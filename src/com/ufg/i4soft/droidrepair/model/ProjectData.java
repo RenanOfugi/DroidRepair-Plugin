@@ -7,6 +7,7 @@ public class ProjectData {
     private static Project project;
     private String typeRepair;
     private static String path_of_patch;
+    private static String name_filepatch;
 
     public static Project getProject() {
         return project;
@@ -14,6 +15,14 @@ public class ProjectData {
 
     public static void setProject(Project project) {
         ProjectData.project = project;
+    }
+
+    public static String getName_filepatch() {
+        return name_filepatch;
+    }
+
+    public static void setName_filepatch(String name_filepatch) {
+        ProjectData.name_filepatch = name_filepatch;
     }
 
     public String getTypeRepair() {
