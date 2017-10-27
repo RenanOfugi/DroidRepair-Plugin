@@ -1,5 +1,3 @@
-[![Github Releases (by Release)](https://img.shields.io/github/downloads/atom/atom/v0.190.0/total.svg)](https://github.com/RenanOfugi/DroidRepair-Plugin)
-[![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg)](https://github.com/RenanOfugi/DroidRepair-Plugin)
 
 # DroidRepair-Plugin
 
