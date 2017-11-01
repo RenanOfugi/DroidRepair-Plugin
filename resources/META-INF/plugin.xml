@@ -1,45 +1,38 @@
 <idea-plugin>
-  <id>com.your.company.unique.plugin.id</id>
-  <name>Angelix Plugin</name>
-  <version>1.0</version>
+    <id>com.ufg.i4soft.plugin.id</id>
+    <name>DroidRepair</name>
+    <version>1.0</version>
 
-  <description><![CDATA[
-      Plugin que permite executar ferramentas de reparo automatizado de software integrado ao Android Studio.<br>
-      <em>most HTML tags may be used</em>
+    <description><![CDATA[
+      Plugin que permite executar ferramentas de reparo automatizado de software, em várias IDEs da família IDEA, especialmente Android Studio.<br>
+      <p>Acesse <a href="https://github.com/RenanOfugi/DroidRepair-Plugin">Projeto DroidRepair</a> para mais informações</p>
     ]]></description>
 
-  <change-notes><![CDATA[
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>
-    ]]>
-  </change-notes>
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="171"/>
 
-  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-  <idea-version since-build="171" />
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products -->
+    <depends>com.intellij.modules.lang</depends>
 
-  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-       on how to target different products -->
-  <!-- uncomment to enable plugin in all products
-  <depends>com.intellij.modules.lang</depends>
-  -->
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
 
-  <extensions defaultExtensionNs="com.intellij">
-    <!-- Add your extensions here -->
-  </extensions>
+    <actions>
+        <!-- Add your actions here -->
+        <group id="Angelix_Plugin.runAngelix" text="Repair">
 
-  <actions>
-    <!-- Add your actions here -->
-    <group id="Angelix_Plugin.runAngelix" text="Repair">
+            <add-to-group group-id="MainMenu" relative-to-action="RunMenu" anchor="after"/>
 
-      <add-to-group group-id="MainMenu" relative-to-action="RunMenu" anchor="after"/>
+            <action id="angelix_plugin.runAngelix" class="com.ufg.i4soft.droidrepair.view.actions.run" text="run repair"
+                    description="visa rodar o angelix no programa atual">
+                <keyboard-shortcut first-keystroke="ctrl I" keymap="$default"/>
+            </action>
 
-      <action id="angelix_plugin.runAngelix" class="com.ufg.i4soft.droidrepair.view.actions.run" text="run repair"
-              description="visa rodar o angelix no programa atual" >
-        <keyboard-shortcut first-keystroke="ctrl I" keymap="$default" />
-      </action>
+        </group>
 
-    </group>
-
-  </actions>
+    </actions>
 
 </idea-plugin>
