@@ -9,10 +9,24 @@ import com.ufg.i4soft.droidrepair.view.windows.MainWindows;
 import com.intellij.openapi.ui.Messages;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 public class ManageAngelix implements RepairTool{
 
-    public void startRepairTool(String path){
+
+    public void startRepairTool(){
+
+        String path = null;
+
+        try {
+
+            path = selectFileRepair();
+
+        } catch (NoSuchElementException e) {
+
+            Messages.showMessageDialog("Arquivo para reparo ausente", "Arquivo Ausente", Messages.getInformationIcon());
+        }
 
         ArrayList<String> args = collectParameters(path);
 
@@ -22,6 +36,28 @@ public class ManageAngelix implements RepairTool{
 
             executeRepairTool(args);
         }
+    }
+
+    private String selectFileRepair(){
+
+        Optional<String> pathOptional = Optional.ofNullable(collectPath());
+
+        FilterData filterData = new FilterData();
+
+        boolean file_valid = filterData.verifyExtensionFile(pathOptional.get());
+
+        if (file_valid){
+
+            return pathOptional.get();
+        }
+
+        return null;
+    }
+
+    private String collectPath() {
+
+        MainWindows windows = new MainWindows();
+        return windows.viewChooseFile("Selecione O Diretório Do Arquivo", "Selecione o arquivo que deseja submeter à execução do angelix");
     }
 
     public ArrayList<String> collectParameters(String path){

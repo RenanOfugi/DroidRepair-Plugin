@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface RepairTool {
 
-    void startRepairTool(String path);
+    void startRepairTool();
 
     ArrayList<String> collectParameters(String path);
 
