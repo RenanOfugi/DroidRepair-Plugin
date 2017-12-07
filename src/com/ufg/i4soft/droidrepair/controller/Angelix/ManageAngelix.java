@@ -12,33 +12,38 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-public class ManageAngelix implements RepairTool{
+public class ManageAngelix implements RepairTool {
 
 
-    public void startRepairTool(){
+    public void startRepairTool() {
 
-        String path = null;
+        String path;
 
         try {
 
             path = selectFileRepair();
 
+            ArrayList<String> args = collectParameters(path);
+
+            boolean all_param = verifyInputs(args);
+
+            if (all_param) {
+
+                executeRepairTool(args);
+            }
+
         } catch (NoSuchElementException e) {
 
             Messages.showMessageDialog("Arquivo para reparo ausente", "Arquivo Ausente", Messages.getInformationIcon());
+
+        } catch (NullPointerException e) {
+
+            Messages.showMessageDialog("Arquivo para reparo inválido", "Arquivo Inválido", Messages.getErrorIcon());
         }
 
-        ArrayList<String> args = collectParameters(path);
-
-        boolean all_param = verifyInputs(args);
-
-        if (all_param){
-
-            executeRepairTool(args);
-        }
     }
 
-    private String selectFileRepair(){
+    private String selectFileRepair() {
 
         Optional<String> pathOptional = Optional.ofNullable(collectPath());
 
@@ -46,7 +51,7 @@ public class ManageAngelix implements RepairTool{
 
         boolean file_valid = filterData.verifyExtensionFile(pathOptional.get());
 
-        if (file_valid){
+        if (file_valid) {
 
             return pathOptional.get();
         }
@@ -60,7 +65,7 @@ public class ManageAngelix implements RepairTool{
         return windows.viewChooseFile("Selecione O Diretório Do Arquivo", "Selecione o arquivo que deseja submeter à execução do angelix");
     }
 
-    public ArrayList<String> collectParameters(String path){
+    public ArrayList<String> collectParameters(String path) {
 
         ArrayList<String> parameters = new ArrayList<>();
         String[] subPathes;
@@ -69,7 +74,7 @@ public class ManageAngelix implements RepairTool{
 
         subPathes = filterData.splitPath(path);
 
-        if (path != null){
+        if (path != null) {
 
             setPathofPatch(subPathes[0]); //Caminho onde sera gerado o patch, sem o ultimo diretorio
 
@@ -115,10 +120,10 @@ public class ManageAngelix implements RepairTool{
 
         String statusline = shell.executeCommand(command);
 
-        if (statusline.equals("success") && deleted_allfiles){
+        if (statusline.equals("success") && deleted_allfiles) {
 
             fileManipulation.searchFilePatch(ProjectData.getPath_of_patch()); //busca o arquivo .patch gerado
-            fileManipulation.deleteOldLines(ProjectData.getPath_of_patch(), ProjectData.getName_filepatch(),ProjectData.getPath_of_patch(),"patchPuro.txt"); // gera um novo arquivo com o patch sem nenhuma linha de código antigo modificado
+            fileManipulation.deleteOldLines(ProjectData.getPath_of_patch(), ProjectData.getName_filepatch(), ProjectData.getPath_of_patch(), "patchPuro.txt"); // gera um novo arquivo com o patch sem nenhuma linha de código antigo modificado
 
             DiffAndroidStudio diff = new DiffAndroidStudio();
             diff.showDiff();
@@ -130,7 +135,7 @@ public class ManageAngelix implements RepairTool{
 
     }
 
-    private void setPathofPatch(String path){
+    private void setPathofPatch(String path) {
 
         FilterData filterData = new FilterData();
         String[] path_patch = filterData.splitPath(path);

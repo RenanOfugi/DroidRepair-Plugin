@@ -12,7 +12,7 @@ public class MainWindows {
 
     public String viewChooseFile(String title, String description) {
 
-        final FileChooserDescriptor descriptor = FileChooserDescriptorFactory.createSingleFileDescriptor();
+        FileChooserDescriptor descriptor = FileChooserDescriptorFactory.createSingleFileDescriptor();
         descriptor.setTitle(title);
         descriptor.setDescription(description);
 
