@@ -81,13 +81,13 @@
               <visible value="true"/>
             </properties>
           </component>
-          <component id="b0a87" class="javax.swing.JRadioButton" binding="genProgRadioButton" default-binding="true">
+          <component id="b0a87" class="javax.swing.JRadioButton" binding="astor4androidRadioButton">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <selected value="false"/>
-              <text value="GenProg"/>
+              <text value="Astor4Android"/>
             </properties>
           </component>
         </children>

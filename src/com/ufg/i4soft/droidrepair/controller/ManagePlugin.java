@@ -2,6 +2,7 @@ package com.ufg.i4soft.droidrepair.controller;
 
 import com.intellij.openapi.ui.Messages;
 import com.ufg.i4soft.droidrepair.controller.Angelix.ManageAngelix;
+import com.ufg.i4soft.droidrepair.controller.Astor4Android.ManageAstor4Android;
 import com.ufg.i4soft.droidrepair.model.FilterData;
 import com.ufg.i4soft.droidrepair.model.ProjectData;
 import com.ufg.i4soft.droidrepair.view.windows.ChooseRepair;
@@ -31,8 +32,9 @@ public class ManagePlugin {
                 angelix.startRepairTool();
                 break;
 
-            case "genprog":
-                Messages.showMessageDialog(ProjectData.getProject(), "Funcionalidade para " + repair + " não implementada :(", "Não É Possivel Executar", Messages.getWarningIcon());
+            case "astor4android":
+                ManageAstor4Android astor4Android = new ManageAstor4Android();
+                astor4Android.startRepairTool();
                 break;
 
             default:

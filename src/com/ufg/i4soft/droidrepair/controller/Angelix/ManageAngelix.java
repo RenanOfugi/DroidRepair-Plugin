@@ -91,6 +91,11 @@ public class ManageAngelix implements RepairTool {
         return parameters;
     }
 
+    @Override
+    public void collectParameters() {
+
+    }
+
     public boolean verifyInputs(ArrayList<String> args) {
 
         boolean all_param = true;
@@ -132,6 +137,11 @@ public class ManageAngelix implements RepairTool {
 
             Messages.showMessageDialog("Valores incorretos de parametro", "Parametro Incorreto", Messages.getErrorIcon());
         }
+
+    }
+
+    @Override
+    public void executeRepairTool() {
 
     }
 

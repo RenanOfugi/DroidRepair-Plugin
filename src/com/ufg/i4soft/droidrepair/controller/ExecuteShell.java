@@ -3,8 +3,9 @@ package com.ufg.i4soft.droidrepair.controller;
 import com.intellij.openapi.ui.Messages;
 import com.ufg.i4soft.droidrepair.excecoes.ErroExecucaoShellException;
 
-import java.io.*;
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.logging.Logger;
 
 public class ExecuteShell {
@@ -43,8 +44,8 @@ public class ExecuteShell {
 
         } catch (IOException e) {
 
-            Messages.showMessageDialog("Erro ao tentar executar o comando no Angelix", "Comando Inválido", Messages.getErrorIcon());
-            throw new ErroExecucaoShellException("Erro ao tentar executar o comando no Angelix");
+            Messages.showMessageDialog("Erro ao tentar executar o comando", "Comando Inválido", Messages.getErrorIcon());
+            throw new ErroExecucaoShellException("Erro ao tentar executar o comando");
 
         }
 

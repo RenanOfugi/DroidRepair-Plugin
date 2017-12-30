@@ -8,7 +8,11 @@ public interface RepairTool {
 
     ArrayList<String> collectParameters(String path);
 
+    void collectParameters();
+
     boolean verifyInputs(ArrayList<String> args);
 
     void executeRepairTool(ArrayList<String> args);
+
+    void executeRepairTool();
 }
