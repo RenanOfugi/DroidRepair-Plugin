@@ -19,9 +19,11 @@ public class ManageAstor4Android implements RepairTool {
         if (parameters_ok) {
 
             executeRepairTool();
+            finishExecution();
         }
 
-        finishExecution();
+        Messages.showMessageDialog("Para encerrar o AVD, copie e cole no terminal:" +
+                " 'sudo printf 'auth %s\\nkill\\n' $(sudo cat ~/.emulator_console_auth_token) | netcat localhost 5554'", "AVD SHUTDOWN", Messages.getInformationIcon());
     }
 
     @Override
@@ -37,17 +39,26 @@ public class ManageAstor4Android implements RepairTool {
         String android_home = android_windows.viewChooseFile("ANDROID_HOME", "Selecione o diretório onde está a pasta Android/sdk");
         Astor4AndroidData.setAndroid_home(android_home);
 
-        MainWindows java_windows = new MainWindows();
-        String java_home = java_windows.viewChooseFile("JAVA_HOME", "Selecione o diretório onde está o JDK");
-        Astor4AndroidData.setJava_home(java_home);
+        if (Astor4AndroidData.getAndroid_home() != null) {
 
-        MainWindows astorworking_windows = new MainWindows();
-        String astorworking_directory = astorworking_windows.viewChooseFile("ASTORWORKER", "Selecione o repositório do AstorWorker");
-        Astor4AndroidData.setAstorworking_directory(astorworking_directory);
+            MainWindows java_windows = new MainWindows();
+            String java_home = java_windows.viewChooseFile("JAVA_HOME", "Selecione o diretório onde está o JDK");
+            Astor4AndroidData.setJava_home(java_home);
+        }
 
-        MainWindows astor4android_windows = new MainWindows();
-        String astor4android_directory = astor4android_windows.viewChooseFile("ASTOR4ANDROID", "Selecione o repositório do Astor4Android");
-        Astor4AndroidData.setAstor4android_directory(astor4android_directory);
+        if (Astor4AndroidData.getJava_home() != null) {
+
+            MainWindows astorworking_windows = new MainWindows();
+            String astorworking_directory = astorworking_windows.viewChooseFile("ASTORWORKER", "Selecione o repositório do AstorWorker");
+            Astor4AndroidData.setAstorworking_directory(astorworking_directory);
+        }
+
+        if (Astor4AndroidData.getAstorworking_directory() != null) {
+
+            MainWindows astor4android_windows = new MainWindows();
+            String astor4android_directory = astor4android_windows.viewChooseFile("ASTOR4ANDROID", "Selecione o repositório do Astor4Android");
+            Astor4AndroidData.setAstor4android_directory(astor4android_directory);
+        }
     }
 
     @Override
@@ -83,8 +94,6 @@ public class ManageAstor4Android implements RepairTool {
 
     private void finishExecution() {
 
-        Messages.showMessageDialog("Tentativa de Reparo Finalizado!" +
-                " Para encerrar o AVD, copie e cole no terminal:" +
-                " 'sudo printf 'auth %s\\nkill\\n' $(sudo cat ~/.emulator_console_auth_token) | netcat localhost 5554'", "Concluido", Messages.getInformationIcon());
+        Messages.showMessageDialog("Tentativa de Reparo Finalizado!" , "Concluido", Messages.getInformationIcon());
     }
 }

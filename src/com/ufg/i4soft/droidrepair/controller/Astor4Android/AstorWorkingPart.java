@@ -11,9 +11,9 @@ public class AstorWorkingPart {
     public boolean startAstorWorking() {
 
         mavenClean();
-        executeAVD();
+        boolean avd_ok = executeAVD();
 
-        return executeAstorWorking();
+        return avd_ok && executeAstorWorking();
     }
 
     private void mavenClean() {
@@ -24,7 +24,7 @@ public class AstorWorkingPart {
         shell.executeCommand(mvn, false, null);
     }
 
-    private void executeAVD() {
+    private boolean executeAVD() {
 
         String avd_name = Messages.showInputDialog("Entre com o nome do AVD a ser executado " +
                 "(lembrando de te-lo baixado seguindo a documentação na wiki)", "AVD NAME", Messages.getInformationIcon());
@@ -35,9 +35,15 @@ public class AstorWorkingPart {
 
         String password = Messages.showPasswordDialog(null, "É necessário elevação de privilégios: Por favor, digite sua senha", "Permissão Administrador", Messages.getInformationIcon());
 
-        Thread thread = new Thread(new ExecuteShellThread(execute_avd_command, true, password));
-        thread.start();
+        if (password != null) {
 
+            Thread thread = new Thread(new ExecuteShellThread(execute_avd_command, true, password));
+            thread.start();
+
+            return true;
+        }
+
+        return false;
     }
 
     private boolean executeAstorWorking() {
@@ -92,21 +98,36 @@ public class AstorWorkingPart {
         String buildtools = buildtools_windows.viewChooseFile("Build-Tools", "Escolha uma pasta do diretório build-tools. ex: /home/user/Documents/Android/Sdk/build-tools/25.0.0");
         Astor4AndroidData.setBuildtools(buildtools);
 
-        MainWindows androidjar_windows = new MainWindows();
-        String androidjar = androidjar_windows.viewChooseFile("AndroidJar", "Selecione o android.jar. Ex: /home/user/Documents/Android/Sdk/platforms/android-25/android.jar");
-        Astor4AndroidData.setAndroidjar(androidjar);
+        if (Astor4AndroidData.getBuildtools() != null) {
 
-        String hostip = Messages.showInputDialog("Insira o IP do host. Host da máquina que executa o Astor4Android", "HOSTIP", Messages.getInformationIcon());
-        Astor4AndroidData.setHostip(hostip);
+            MainWindows androidjar_windows = new MainWindows();
+            String androidjar = androidjar_windows.viewChooseFile("AndroidJar", "Selecione o android.jar. Ex: /home/user/Documents/Android/Sdk/platforms/android-25/android.jar");
+            Astor4AndroidData.setAndroidjar(androidjar);
+        }
 
-        String hostport = Messages.showInputDialog("Insira a porta do host que executa o Astor4Android", "HOSTPORT", Messages.getInformationIcon());
-        Astor4AndroidData.setHostport(hostport);
+        if (Astor4AndroidData.getAndroidjar() != null) {
 
-        String workerip = Messages.showInputDialog("Insira o IP da máquina que o AstorWorker irá ser executado", "WORKERIP", Messages.getInformationIcon());
-        Astor4AndroidData.setWorkerip(workerip);
+            String hostip = Messages.showInputDialog("Insira o IP do host. Host da máquina que executa o Astor4Android", "HOSTIP", Messages.getInformationIcon());
+            Astor4AndroidData.setHostip(hostip);
+        }
 
-        String workerport = Messages.showInputDialog("Insira a porta da máquina que o AstorWorker irá ser executado", "WORKERPORT", Messages.getInformationIcon());
-        Astor4AndroidData.setWorkerport(workerport);
+        if (Astor4AndroidData.getHostip() != null) {
+
+            String hostport = Messages.showInputDialog("Insira a porta do host que executa o Astor4Android", "HOSTPORT", Messages.getInformationIcon());
+            Astor4AndroidData.setHostport(hostport);
+        }
+
+        if (Astor4AndroidData.getHostport() != null) {
+
+            String workerip = Messages.showInputDialog("Insira o IP da máquina que o AstorWorker irá ser executado", "WORKERIP", Messages.getInformationIcon());
+            Astor4AndroidData.setWorkerip(workerip);
+        }
+
+        if (Astor4AndroidData.getWorkerip() != null) {
+
+            String workerport = Messages.showInputDialog("Insira a porta da máquina que o AstorWorker irá ser executado", "WORKERPORT", Messages.getInformationIcon());
+            Astor4AndroidData.setWorkerport(workerport);
+        }
     }
 
     private boolean verifyParameters() {
