@@ -61,8 +61,8 @@ public class Astor4AndroidPart {
 
         if (Astor4AndroidData.getFlthreshold() != null) {
 
-            String flthreshold = Messages.showInputDialog("Entre com o valor minimo para fault localization (entre 0 e 1)", "FAULT LOCALIZATION VALUE", Messages.getInformationIcon());
-            Astor4AndroidData.setFlthreshold(flthreshold);
+            String instrumentationfailing = Messages.showInputDialog("Entre com testes de instrumentação separados por dois-pontos", "INSTRUMENTATION FAILING", Messages.getInformationIcon());
+            Astor4AndroidData.setInstrumentationfailing(instrumentationfailing);
         }
     }
 
