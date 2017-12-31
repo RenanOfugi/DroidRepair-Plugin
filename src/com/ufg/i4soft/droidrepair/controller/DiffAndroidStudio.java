@@ -22,7 +22,7 @@ public class DiffAndroidStudio {
         if (path_androidstudio.toLowerCase().endsWith("idea.sh") || path_androidstudio.toLowerCase().endsWith("studio.sh")){
 
             ExecuteShell shell = new ExecuteShell();
-            shell.executeCommand(command);
+            shell.executeCommand(command, false, null);
         } else {
             Messages.showMessageDialog("Selecione o arquivo idea.sh ou studio.sh","Arquivo Incorreto", Messages.getErrorIcon());
         }

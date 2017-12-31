@@ -44,8 +44,6 @@ public class FilterData {
             }
         }
 
-        Messages.showMessageDialog("Arquivo para reparo inválido", "Arquivo Inválido", Messages.getErrorIcon());
-
         return false;
     }
 }

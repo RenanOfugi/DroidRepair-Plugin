@@ -2,6 +2,9 @@ package com.ufg.i4soft.droidrepair.controller;
 
 import org.junit.Test;
 
+import java.io.File;
+import java.io.IOException;
+
 import static org.junit.Assert.*;
 
 public class ExecuteShellTest {
@@ -16,7 +19,7 @@ public class ExecuteShellTest {
                 "test.c oracle 1 2 3 --assert assert.json";
 
         ExecuteShell shell = new ExecuteShell();
-        shell.executeCommand(command);
+        shell.executeCommand(command, false, null);
 
     }
 

@@ -9,7 +9,7 @@ public class ChooseRepair extends JDialog {
     private JButton buttonOK;
     private JButton buttonCancel;
     private JRadioButton angelixRadioButton;
-    private JRadioButton genProgRadioButton;
+    private JRadioButton astor4androidRadioButton;
 
     private static String typerepair;
 
@@ -45,8 +45,8 @@ public class ChooseRepair extends JDialog {
 
         if (angelixRadioButton.isSelected()) {
             typerepair = "angelix";
-        } else if (genProgRadioButton.isSelected()) {
-            typerepair = "genprog";
+        } else if (astor4androidRadioButton.isSelected()) {
+            typerepair = "astor4android";
         }
 
         dispose();
@@ -61,7 +61,7 @@ public class ChooseRepair extends JDialog {
 
         ButtonGroup group = new ButtonGroup();
         group.add(angelixRadioButton);
-        group.add(genProgRadioButton);
+        group.add(astor4androidRadioButton);
     }
 
     private void centerWindows() {

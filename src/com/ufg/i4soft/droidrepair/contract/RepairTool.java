@@ -4,11 +4,17 @@ import java.util.ArrayList;
 
 public interface RepairTool {
 
-    void startRepairTool(String path);
+    void startRepairTool();
 
     ArrayList<String> collectParameters(String path);
 
+    void collectParameters();
+
     boolean verifyInputs(ArrayList<String> args);
 
+    boolean verifyInputs();
+
     void executeRepairTool(ArrayList<String> args);
+
+    void executeRepairTool();
 }
