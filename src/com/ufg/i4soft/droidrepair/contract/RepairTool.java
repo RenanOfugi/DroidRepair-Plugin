@@ -12,6 +12,8 @@ public interface RepairTool {
 
     boolean verifyInputs(ArrayList<String> args);
 
+    boolean verifyInputs();
+
     void executeRepairTool(ArrayList<String> args);
 
     void executeRepairTool();

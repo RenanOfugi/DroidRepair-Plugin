@@ -111,6 +111,11 @@ public class ManageAngelix implements RepairTool {
         return all_param;
     }
 
+    @Override
+    public boolean verifyInputs() {
+        return false;
+    }
+
     public void executeRepairTool(ArrayList<String> args) {
 
         ExecuteShell shell = new ExecuteShell();
@@ -123,7 +128,7 @@ public class ManageAngelix implements RepairTool {
         FileManipulation fileManipulation = new FileManipulation();
         boolean deleted_allfiles = fileManipulation.deleteAllPatches(ProjectData.getPath_of_patch()); //deleta todos os arquivos .patch do diretório escolhido
 
-        String statusline = shell.executeCommand(command);
+        String statusline = shell.executeCommand(command, false, null);
 
         if (statusline.equals("success") && deleted_allfiles) {
 

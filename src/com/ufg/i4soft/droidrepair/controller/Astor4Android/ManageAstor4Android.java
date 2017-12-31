@@ -1,5 +1,6 @@
 package com.ufg.i4soft.droidrepair.controller.Astor4Android;
 
+import com.intellij.openapi.ui.Messages;
 import com.ufg.i4soft.droidrepair.contract.RepairTool;
 import com.ufg.i4soft.droidrepair.model.Astor4AndroidData;
 import com.ufg.i4soft.droidrepair.view.windows.MainWindows;
@@ -12,7 +13,15 @@ public class ManageAstor4Android implements RepairTool {
     public void startRepairTool() {
 
         collectParameters();
-        executeRepairTool();
+
+        boolean parameters_ok = verifyInputs();
+
+        if (parameters_ok) {
+
+            executeRepairTool();
+        }
+
+        finishExecution();
     }
 
     @Override
@@ -33,7 +42,7 @@ public class ManageAstor4Android implements RepairTool {
         Astor4AndroidData.setJava_home(java_home);
 
         MainWindows astorworking_windows = new MainWindows();
-        String astorworking_directory = astorworking_windows.viewChooseFile("ASTORWORKING", "Selecione o repositório do AstorWorking");
+        String astorworking_directory = astorworking_windows.viewChooseFile("ASTORWORKER", "Selecione o repositório do AstorWorker");
         Astor4AndroidData.setAstorworking_directory(astorworking_directory);
 
         MainWindows astor4android_windows = new MainWindows();
@@ -47,6 +56,15 @@ public class ManageAstor4Android implements RepairTool {
     }
 
     @Override
+    public boolean verifyInputs() {
+
+        return Astor4AndroidData.getAndroid_home() != null &&
+                Astor4AndroidData.getJava_home() != null &&
+                Astor4AndroidData.getAstorworking_directory() != null &&
+                Astor4AndroidData.getAstor4android_directory() != null;
+    }
+
+    @Override
     public void executeRepairTool(ArrayList<String> args) {
 
     }
@@ -54,10 +72,19 @@ public class ManageAstor4Android implements RepairTool {
     @Override
     public void executeRepairTool() {
 
-        AstorWorkingPart astorWorking = new AstorWorkingPart();
-        astorWorking.startAstorWorking();
+        AstorWorkingPart astorWorkingpart = new AstorWorkingPart();
+        boolean astorworker_ok = astorWorkingpart.startAstorWorking();
 
-        Astor4AndroidPart android4android = new Astor4AndroidPart();
-        android4android.startAstor4Android();
+        if (astorworker_ok) {
+            Astor4AndroidPart android4androidpart = new Astor4AndroidPart();
+            android4androidpart.startAstor4Android();
+        }
+    }
+
+    private void finishExecution() {
+
+        Messages.showMessageDialog("Tentativa de Reparo Finalizado!" +
+                " Para encerrar o AVD, copie e cole no terminal:" +
+                " 'sudo printf 'auth %s\\nkill\\n' $(sudo cat ~/.emulator_console_auth_token) | netcat localhost 5554'", "Concluido", Messages.getInformationIcon());
     }
 }

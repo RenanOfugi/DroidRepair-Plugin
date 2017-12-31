@@ -18,11 +18,11 @@ public class ExecuteShellTest {
                 "angelix ~/angelix/tests/enum/src " + //execução do angelix de fato
                 "test.c oracle 1 2 3 --assert assert.json"; */
 
-        String command = "cd /home/renan/Documentos;echo teste | tee local.txt";
-
+        String command = "sudo -S echo 'auth %s\nkill\n' $(sudo cat ~/.emulator_console_auth_token) | netcat localhost 5554";
 
         ExecuteShell shell = new ExecuteShell();
-        shell.executeCommand(command);
+        shell.executeCommand(command, false, null);
+
     }
 
     @Test
