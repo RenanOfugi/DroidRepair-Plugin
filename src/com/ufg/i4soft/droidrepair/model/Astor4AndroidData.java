@@ -6,7 +6,7 @@ public class Astor4AndroidData {
 
     private static String android_home;
     private static String java_home;
-    private static String astorworking_directory;
+    private static String astorworker_directory;
     private static String astor4android_directory;
     private final static String commandbase_run_astorworking = "java -cp $(cat astorworker-classpath.txt):target/classes br.ufg.inf.astorworker.AstorWorker";
     private final static String commandbase_run_astor4android = "java -cp $(cat astor-classpath.txt):target/classes br.ufg.inf.main.evolution.Astor4AndroidMain";
@@ -53,12 +53,12 @@ public class Astor4AndroidData {
         Astor4AndroidData.java_home = java_home;
     }
 
-    public static String getAstorworking_directory() {
-        return astorworking_directory;
+    public static String getAstorworker_directory() {
+        return astorworker_directory;
     }
 
-    public static void setAstorworking_directory(String astorworking_directory) {
-        Astor4AndroidData.astorworking_directory = astorworking_directory;
+    public static void setAstorworker_directory(String astorworker_directory) {
+        Astor4AndroidData.astorworker_directory = astorworker_directory;
     }
 
     public static String getAstor4android_directory() {

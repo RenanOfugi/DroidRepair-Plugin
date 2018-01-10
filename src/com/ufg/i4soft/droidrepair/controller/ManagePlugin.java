@@ -8,6 +8,7 @@ import com.ufg.i4soft.droidrepair.model.ProjectData;
 import com.ufg.i4soft.droidrepair.view.windows.ChooseRepair;
 import com.ufg.i4soft.droidrepair.view.windows.MainWindows;
 
+import java.io.File;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -41,4 +42,5 @@ public class ManagePlugin {
                 Messages.showMessageDialog("escolha de ferramenta inválida", "Ferramenta De Reparo Inválido", Messages.getWarningIcon());
         }
     }
+
 }
