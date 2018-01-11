@@ -3,14 +3,13 @@ package com.ufg.i4soft.droidrepair.view.windows;
 import javax.swing.*;
 import java.awt.*;
 
-public class ProgressBarDemo extends JFrame {
+public class LoadingConsole extends JFrame {
 
-    private JProgressBar progressBar;
 
-    public ProgressBarDemo() {
+    public LoadingConsole() {
         super("Aguarde");
 
-        progressBar = new JProgressBar(0, 100);
+        JProgressBar progressBar = new JProgressBar(0, 100);
         progressBar.setValue(0);
         progressBar.setStringPainted(true);
 
@@ -26,8 +25,8 @@ public class ProgressBarDemo extends JFrame {
     private void createAndShowGUI() {
         //Create and set up the window.
         pack();
-        setTitle("Escolha da Ferramenta de Reparo");
-        setSize(500, 300);
+        setTitle("Processando. Aguarde...");
+        setSize(500, 0);
         centerWindows();
     }
 

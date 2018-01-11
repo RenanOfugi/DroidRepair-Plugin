@@ -1,5 +1,6 @@
 package com.ufg.i4soft.droidrepair.controller.Astor4Android;
 
+import com.intellij.openapi.ui.Messages;
 import com.ufg.i4soft.droidrepair.excecoes.ArquivoNaoEncontrado;
 import com.ufg.i4soft.droidrepair.excecoes.ErroEscritaDados;
 import com.ufg.i4soft.droidrepair.model.Astor4AndroidData;
@@ -19,6 +20,9 @@ public class ConfigurationAstor4Android {
 
         properties.setProperty("androidHome", home + "/Android/Sdk");
         properties.setProperty("javaHome", windows.viewChooseFile("JAVA_HOME", "Selecione o diretório onde está o JDK"));
+        String avd_name = Messages.showInputDialog("Entre com o nome do AVD a ser executado " +
+                "(lembrando de te-lo baixado seguindo a documentação na wiki)", "AVD NAME", Messages.getInformationIcon());
+        properties.setProperty("avdname", avd_name);
         properties.setProperty("astorworkerDirectory", home + "/droidrepair/astorworker");
         properties.setProperty("astor4androidDirectory", home + "/droidrepair/astor4android");
         properties.setProperty("hostip", "127.0.0.1");
@@ -59,6 +63,7 @@ public class ConfigurationAstor4Android {
 
             Astor4AndroidData.setAndroid_home(properties.getProperty("androidHome"));
             Astor4AndroidData.setJava_home(properties.getProperty("javaHome"));
+            Astor4AndroidData.setAvdname(properties.getProperty("avdname"));
             Astor4AndroidData.setAstorworker_directory(properties.getProperty("astorworkerDirectory"));
             Astor4AndroidData.setAstor4android_directory(properties.getProperty("astor4androidDirectory"));
             Astor4AndroidData.setHostip(properties.getProperty("hostip"));

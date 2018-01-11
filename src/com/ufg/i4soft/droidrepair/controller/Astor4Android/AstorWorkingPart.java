@@ -4,13 +4,13 @@ import com.intellij.openapi.ui.Messages;
 import com.ufg.i4soft.droidrepair.controller.ExecuteShell;
 import com.ufg.i4soft.droidrepair.controller.ExecuteShellThread;
 import com.ufg.i4soft.droidrepair.model.Astor4AndroidData;
-import com.ufg.i4soft.droidrepair.view.windows.MainWindows;
 
 public class AstorWorkingPart {
 
     public boolean startAstorWorking() {
 
         mavenClean();
+
         boolean avd_ok = executeAVD();
 
         if (avd_ok) {
@@ -31,12 +31,9 @@ public class AstorWorkingPart {
 
     private boolean executeAVD() {
 
-        String avd_name = Messages.showInputDialog("Entre com o nome do AVD a ser executado " +
-                "(lembrando de te-lo baixado seguindo a documentação na wiki)", "AVD NAME", Messages.getInformationIcon());
-
         String execute_avd_command = "export QEMU_AUDIO_DRV=none;" +
                 "cd " + Astor4AndroidData.getAndroid_home() + "/tools;" +
-                "sudo -b ./emulator -avd " + avd_name + " -no-skin -no-window -no-boot-anim";
+                "sudo -b ./emulator -avd " + Astor4AndroidData.getAvdname() + " -no-skin -no-window -no-boot-anim";
 
         String password = Messages.showPasswordDialog(null, "É necessário elevação de privilégios: Por favor, digite sua senha", "Permissão Administrador", Messages.getInformationIcon());
 

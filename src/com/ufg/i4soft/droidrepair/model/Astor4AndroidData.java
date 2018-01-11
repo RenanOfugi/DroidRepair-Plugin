@@ -6,6 +6,7 @@ public class Astor4AndroidData {
 
     private static String android_home;
     private static String java_home;
+    private static String avdname;
     private static String astorworker_directory;
     private static String astor4android_directory;
     private final static String commandbase_run_astorworking = "java -cp $(cat astorworker-classpath.txt):target/classes br.ufg.inf.astorworker.AstorWorker";
@@ -28,6 +29,14 @@ public class Astor4AndroidData {
     private static String stopfirst;
     private static String flthreshold;
     private static String instrumentationfailing;
+
+    public static String getAvdname() {
+        return avdname;
+    }
+
+    public static void setAvdname(String avdname) {
+        Astor4AndroidData.avdname = avdname;
+    }
 
     public static String getCommandbase_run_astor4android() {
         return commandbase_run_astor4android;

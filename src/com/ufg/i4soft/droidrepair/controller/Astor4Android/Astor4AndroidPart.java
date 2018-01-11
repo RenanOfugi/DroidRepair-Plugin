@@ -4,6 +4,9 @@ import com.intellij.openapi.ui.Messages;
 import com.ufg.i4soft.droidrepair.controller.ExecuteShell;
 import com.ufg.i4soft.droidrepair.model.Astor4AndroidData;
 import com.ufg.i4soft.droidrepair.view.windows.MainWindows;
+import com.ufg.i4soft.droidrepair.view.windows.LoadingConsole;
+
+import javax.swing.*;
 
 public class Astor4AndroidPart {
 
@@ -72,5 +75,6 @@ public class Astor4AndroidPart {
                 "-port " + Astor4AndroidData.getHostport();
 
         shell.executeCommand(execute_astor4android, true, System.getProperty("user.home") + "/droidrepair/logAstor4Android.txt");
+
     }
 }
