@@ -14,6 +14,8 @@ public class ManageAstor4Android implements RepairTool {
 
         if (createFolderAstor4Android()) {
 
+            configureAstor4android();
+
             Messages.showMessageDialog("Bem vindo à execução do Astor4Android! Como é sua primeira vez," +
                             " deverá clonar os repositórios do astorworker e do astor4android dentro da pasta 'droidrepair' na sua home",
                     "REPOSITORIOS NECESSARIOS", Messages.getInformationIcon());
@@ -21,8 +23,6 @@ public class ManageAstor4Android implements RepairTool {
         }
 
         if (verifyRepositories() && !createFolderAstor4Android()) {
-
-            configureAstor4android();
 
             boolean parameters_ok = verifyInputs();
 
