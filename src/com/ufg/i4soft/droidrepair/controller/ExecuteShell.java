@@ -2,6 +2,7 @@ package com.ufg.i4soft.droidrepair.controller;
 
 import com.intellij.openapi.ui.Messages;
 import com.ufg.i4soft.droidrepair.excecoes.ErroExecucaoShellException;
+import com.ufg.i4soft.droidrepair.view.windows.LoadingConsole;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
@@ -26,6 +27,9 @@ public class ExecuteShell {
             BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
             String line;
+
+            LoadingConsole console = new LoadingConsole();
+            console.setVisible(true);
 
             while ((line = in.readLine()) != null) {
                 System.out.println(line);
@@ -53,6 +57,8 @@ public class ExecuteShell {
                     gravar.flush();
                 }
             }
+
+            console.setVisible(false);
 
             if (this.arquivo != null) {
 
