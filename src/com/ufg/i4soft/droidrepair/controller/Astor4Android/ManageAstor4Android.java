@@ -3,8 +3,8 @@ package com.ufg.i4soft.droidrepair.controller.Astor4Android;
 import com.intellij.openapi.ui.Messages;
 import com.ufg.i4soft.droidrepair.contract.RepairTool;
 import com.ufg.i4soft.droidrepair.model.Astor4AndroidData;
-import com.ufg.i4soft.droidrepair.view.windows.MainWindows;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class ManageAstor4Android implements RepairTool {
@@ -12,18 +12,26 @@ public class ManageAstor4Android implements RepairTool {
     @Override
     public void startRepairTool() {
 
-        collectParameters();
+        if (createFolderAstor4Android()) {
 
-        boolean parameters_ok = verifyInputs();
+            configureAstor4android();
 
-        if (parameters_ok) {
+            Messages.showMessageDialog("Bem vindo à execução do Astor4Android! Como é sua primeira vez," +
+                            " deverá clonar os repositórios do astorworker e do astor4android dentro da pasta 'droidrepair' na sua home",
+                    "REPOSITORIOS NECESSARIOS", Messages.getInformationIcon());
 
-            executeRepairTool();
-            finishExecution();
+        } else if (verifyRepositories() && !createFolderAstor4Android()) {
+
+            configureAstor4android();
+
+            boolean parameters_ok = verifyInputs();
+
+            if (parameters_ok) {
+
+                executeRepairTool();
+            }
         }
 
-        Messages.showMessageDialog("Para encerrar o AVD, copie e cole no terminal:" +
-                " 'sudo printf 'auth %s\\nkill\\n' $(sudo cat ~/.emulator_console_auth_token) | netcat localhost 5554'", "AVD SHUTDOWN", Messages.getInformationIcon());
     }
 
     @Override
@@ -35,30 +43,8 @@ public class ManageAstor4Android implements RepairTool {
     @Override
     public void collectParameters() {
 
-        MainWindows android_windows = new MainWindows();
-        String android_home = android_windows.viewChooseFile("ANDROID_HOME", "Selecione o diretório onde está a pasta Android/sdk");
-        Astor4AndroidData.setAndroid_home(android_home);
-
-        if (Astor4AndroidData.getAndroid_home() != null) {
-
-            MainWindows java_windows = new MainWindows();
-            String java_home = java_windows.viewChooseFile("JAVA_HOME", "Selecione o diretório onde está o JDK");
-            Astor4AndroidData.setJava_home(java_home);
-        }
-
-        if (Astor4AndroidData.getJava_home() != null) {
-
-            MainWindows astorworking_windows = new MainWindows();
-            String astorworking_directory = astorworking_windows.viewChooseFile("ASTORWORKER", "Selecione o repositório do AstorWorker");
-            Astor4AndroidData.setAstorworking_directory(astorworking_directory);
-        }
-
-        if (Astor4AndroidData.getAstorworking_directory() != null) {
-
-            MainWindows astor4android_windows = new MainWindows();
-            String astor4android_directory = astor4android_windows.viewChooseFile("ASTOR4ANDROID", "Selecione o repositório do Astor4Android");
-            Astor4AndroidData.setAstor4android_directory(astor4android_directory);
-        }
+        ConfigurationAstor4Android configurationAstor4Android = new ConfigurationAstor4Android();
+        configurationAstor4Android.setVariablesWithFileProperties();
     }
 
     @Override
@@ -69,10 +55,9 @@ public class ManageAstor4Android implements RepairTool {
     @Override
     public boolean verifyInputs() {
 
-        return Astor4AndroidData.getAndroid_home() != null &&
-                Astor4AndroidData.getJava_home() != null &&
-                Astor4AndroidData.getAstorworking_directory() != null &&
-                Astor4AndroidData.getAstor4android_directory() != null;
+        return Astor4AndroidData.getJava_home() != null &&
+                Astor4AndroidData.getBuildtools() != null &&
+                Astor4AndroidData.getAndroidjar() != null;
     }
 
     @Override
@@ -92,8 +77,54 @@ public class ManageAstor4Android implements RepairTool {
         }
     }
 
-    private void finishExecution() {
+    private void configureAstor4android() {
 
-        Messages.showMessageDialog("Tentativa de Reparo Finalizado!" , "Concluido", Messages.getInformationIcon());
+        ConfigurationAstor4Android configurationAstor4Android = new ConfigurationAstor4Android();
+
+        File file = new File(System.getProperty("user.home") + "/droidrepair/config_astor4android.properties");
+
+        if (file.exists()) {
+
+            collectParameters();
+        } else {
+
+            configurationAstor4Android.createConfigurationFile();
+
+            Messages.showMessageDialog("Foi criado um arquivo 'config_astor4android.properties' na pasta droidrepair, verifique se todos as informações" +
+                            " contidas nesse arquivo estão corretas, e execute o plugin novamente",
+                    "VERIFICAÇÂO DE DADOS", Messages.getInformationIcon());
+        }
+    }
+
+    static void messageFinishExecution() {
+
+        Messages.showMessageDialog("Tentativa de Reparo Finalizado!", "Concluido", Messages.getInformationIcon());
+        Messages.showMessageDialog("Para encerrar o AVD, copie e cole no terminal:" +
+                " 'sudo printf 'auth %s\\nkill\\n' $(sudo cat ~/.emulator_console_auth_token) | netcat localhost 5554'", "AVD SHUTDOWN", Messages.getInformationIcon());
+    }
+
+    private boolean createFolderAstor4Android() {
+
+        File directory = new File(System.getProperty("user.home") + "/droidrepair");
+
+        if (!directory.exists()) {
+            directory.mkdir();
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean verifyRepositories() {
+
+        File astorworker_directory = new File(System.getProperty("user.home") + "/droidrepair/astorworker");
+        File astor4android_directory = new File(System.getProperty("user.home") + "/droidrepair/astor4android");
+
+        if (astor4android_directory.exists() && astorworker_directory.exists()) {
+            return true;
+        } else {
+            Messages.showMessageDialog("Os repositórios não estão presentes na pasta 'droidrepair'", "AUSENCIA DE REPOSITORIOS", Messages.getErrorIcon());
+            return false;
+        }
     }
 }

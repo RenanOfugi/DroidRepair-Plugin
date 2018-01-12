@@ -2,9 +2,12 @@ package com.ufg.i4soft.droidrepair.controller;
 
 import com.intellij.openapi.ui.Messages;
 import com.ufg.i4soft.droidrepair.excecoes.ErroExecucaoShellException;
+import com.ufg.i4soft.droidrepair.view.windows.WaitExecuteShell;
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.*;
 import java.io.*;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class ExecuteShell {
@@ -21,7 +24,7 @@ public class ExecuteShell {
 
         try {
 
-            Process p = Runtime.getRuntime().exec(new String[]{"/bin/bash","-c",command});
+            Process p = Runtime.getRuntime().exec(new String[]{"/bin/bash", "-c", command});
 
             BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
@@ -30,10 +33,10 @@ public class ExecuteShell {
             while ((line = in.readLine()) != null) {
                 System.out.println(line);
 
-                if (line.toLowerCase().contains("success")){
+                if (line.toLowerCase().contains("success")) {
 
                     statusline = "success";
-                } else if (line.toLowerCase().contains("fail")){
+                } else if (line.toLowerCase().contains("fail")) {
 
                     statusline = "fail";
                 }
@@ -44,16 +47,17 @@ public class ExecuteShell {
             }
 
             BufferedReader stderr = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-            while ((line = stderr.readLine()) != null){
+            while ((line = stderr.readLine()) != null) {
 
                 System.out.println(line);
 
                 if (write_file) {
                     fileWritterShell(line, path_file);
+                    gravar.flush();
                 }
             }
 
-            if (this.arquivo != null){
+            if (this.arquivo != null) {
 
                 this.arquivo.close();
                 this.start_writter = true;
@@ -71,10 +75,9 @@ public class ExecuteShell {
         return statusline;
     }
 
-
     private void fileWritterShell(String line, String path_file) throws IOException {
 
-        if (start_writter){
+        if (start_writter) {
 
             File file = new File(path_file);
             FileWriter arquivo = new FileWriter(file.getCanonicalFile());
@@ -86,5 +89,35 @@ public class ExecuteShell {
         } else {
             this.gravar.printf(line + "\n");
         }
+    }
+
+    public void executeShellLoadingMessage(String command, @NotNull boolean write_file, String path_file) {
+
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+
+            final WaitExecuteShell waitExecuteShell = WaitExecuteShell.showCommand();
+
+            @Override
+            protected Void doInBackground() throws Exception {
+
+                publish();
+                executeCommand(command, write_file, path_file);
+
+                return null;
+            }
+
+            @Override
+            protected void process(List<Void> chunks) {
+                waitExecuteShell.setVisible(true);
+            }
+
+            @Override
+            protected void done() {
+                waitExecuteShell.setVisible(false);
+            }
+        };
+
+        worker.execute();
+        
     }
 }
