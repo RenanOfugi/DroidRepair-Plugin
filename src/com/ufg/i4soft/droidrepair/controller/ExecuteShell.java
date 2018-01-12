@@ -2,10 +2,12 @@ package com.ufg.i4soft.droidrepair.controller;
 
 import com.intellij.openapi.ui.Messages;
 import com.ufg.i4soft.droidrepair.excecoes.ErroExecucaoShellException;
-import com.ufg.i4soft.droidrepair.view.windows.LoadingConsole;
+import com.ufg.i4soft.droidrepair.view.windows.WaitExecuteShell;
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.*;
 import java.io.*;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class ExecuteShell {
@@ -27,9 +29,6 @@ public class ExecuteShell {
             BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
             String line;
-
-            LoadingConsole console = new LoadingConsole();
-            console.setVisible(true);
 
             while ((line = in.readLine()) != null) {
                 System.out.println(line);
@@ -57,8 +56,6 @@ public class ExecuteShell {
                     gravar.flush();
                 }
             }
-
-            console.setVisible(false);
 
             if (this.arquivo != null) {
 
@@ -92,5 +89,35 @@ public class ExecuteShell {
         } else {
             this.gravar.printf(line + "\n");
         }
+    }
+
+    public void executeShellLoadingMessage(String command, @NotNull boolean write_file, String path_file) {
+
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+
+            final WaitExecuteShell waitExecuteShell = WaitExecuteShell.showCommand();
+
+            @Override
+            protected Void doInBackground() throws Exception {
+
+                publish();
+                executeCommand(command, write_file, path_file);
+
+                return null;
+            }
+
+            @Override
+            protected void process(List<Void> chunks) {
+                waitExecuteShell.setVisible(true);
+            }
+
+            @Override
+            protected void done() {
+                waitExecuteShell.setVisible(false);
+            }
+        };
+
+        worker.execute();
+        
     }
 }

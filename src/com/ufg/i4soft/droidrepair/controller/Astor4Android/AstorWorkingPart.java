@@ -26,7 +26,8 @@ public class AstorWorkingPart {
         String mvn = "cd " + Astor4AndroidData.getAstorworker_directory() + ";mvn clean compile";
 
         ExecuteShell shell = new ExecuteShell();
-        shell.executeCommand(mvn, false, null);
+        //shell.executeCommand(mvn, false, null);
+        shell.executeShellLoadingMessage(mvn, false, null);
     }
 
     private boolean executeAVD() {
@@ -52,15 +53,13 @@ public class AstorWorkingPart {
 
         String build_maven = "cd " + Astor4AndroidData.getAstorworker_directory() + ";" +
                 "mvn dependency:build-classpath;" +
-                "mvn dependency:build-classpath | egrep -v \"(^\\[INFO\\]|^\\[WARNING\\])\" | tee astorworker-classpath.txt";
-
-        String create_file_local_properties = "cd " + Astor4AndroidData.getAstorworker_directory() + ";" +
+                "mvn dependency:build-classpath | egrep -v \"(^\\[INFO\\]|^\\[WARNING\\])\" | tee astorworker-classpath.txt;" +
+                "cd " + Astor4AndroidData.getAstorworker_directory() + ";" +
                 "echo sdk.dir=" + Astor4AndroidData.getAndroid_home() + " | " +
                 "tee local.properties";
 
         ExecuteShell shell = new ExecuteShell();
-        shell.executeCommand(build_maven, false, null);
-        shell.executeCommand(create_file_local_properties, false, null);
+        shell.executeShellLoadingMessage(build_maven, false, null);
 
         String execute_astorworking = "cd " + Astor4AndroidData.getAstorworker_directory() + ";" +
                 Astor4AndroidData.getCommandbase_run_astorworking() + " " +

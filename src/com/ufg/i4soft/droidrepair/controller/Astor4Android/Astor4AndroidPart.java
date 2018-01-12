@@ -4,9 +4,11 @@ import com.intellij.openapi.ui.Messages;
 import com.ufg.i4soft.droidrepair.controller.ExecuteShell;
 import com.ufg.i4soft.droidrepair.model.Astor4AndroidData;
 import com.ufg.i4soft.droidrepair.view.windows.MainWindows;
-import com.ufg.i4soft.droidrepair.view.windows.LoadingConsole;
+import com.ufg.i4soft.droidrepair.view.windows.WaitExecuteShell;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import java.util.List;
 
 public class Astor4AndroidPart {
 
@@ -29,7 +31,7 @@ public class Astor4AndroidPart {
         String mvn = "cd " + Astor4AndroidData.getAstor4android_directory() + ";mvn clean compile";
 
         ExecuteShell shell = new ExecuteShell();
-        shell.executeCommand(mvn, false, null);
+        shell.executeShellLoadingMessage(mvn, false, null);
     }
 
     private void collectParameters() {
@@ -50,6 +52,39 @@ public class Astor4AndroidPart {
         return Astor4AndroidData.getLocation() != null && Astor4AndroidData.getInstrumentationfailing() != null;
     }
 
+    public void executeShellFinalAstor4Android(String command, @NotNull boolean write_file, String path_file) {
+
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+
+            final WaitExecuteShell waitExecuteShell = WaitExecuteShell.showCommand();
+
+            @Override
+            protected Void doInBackground() throws Exception {
+
+                publish();
+                ExecuteShell shell = new ExecuteShell();
+
+                shell.executeCommand(command, write_file, path_file);
+
+                return null;
+            }
+
+            @Override
+            protected void process(List<Void> chunks) {
+                waitExecuteShell.setVisible(true);
+            }
+
+            @Override
+            protected void done() {
+                waitExecuteShell.setVisible(false);
+                ManageAstor4Android.messageFinishExecution();
+            }
+        };
+
+        worker.execute();
+
+    }
+
     private void executeAstor4Android() {
 
         Messages.showMessageDialog("Será realizado a tentativa de reparo. Este procedimento poderá demorar algum tempo. Seja paciente", "INICIO DE REPARO", Messages.getWarningIcon());
@@ -59,7 +94,7 @@ public class Astor4AndroidPart {
                 "mvn dependency:build-classpath | egrep -v \"(^\\[INFO\\]|^\\[WARNING\\])\" | tee astor-classpath.txt";
 
         ExecuteShell shell = new ExecuteShell();
-        shell.executeCommand(build_maven, false, null);
+        shell.executeShellLoadingMessage(build_maven, false, null);
 
         String execute_astor4android = "cd " + Astor4AndroidData.getAstor4android_directory() + ";" +
                 Astor4AndroidData.getCommandbase_run_astor4android() + " " +
@@ -74,7 +109,7 @@ public class Astor4AndroidPart {
                 "-instrumentationfailing " + Astor4AndroidData.getInstrumentationfailing() + " " +
                 "-port " + Astor4AndroidData.getHostport();
 
-        shell.executeCommand(execute_astor4android, true, System.getProperty("user.home") + "/droidrepair/logAstor4Android.txt");
+        executeShellFinalAstor4Android(execute_astor4android, true, System.getProperty("user.home") + "/droidrepair/logAstor4Android.txt");
 
     }
 }

@@ -20,19 +20,15 @@ public class ManageAstor4Android implements RepairTool {
                             " deverá clonar os repositórios do astorworker e do astor4android dentro da pasta 'droidrepair' na sua home",
                     "REPOSITORIOS NECESSARIOS", Messages.getInformationIcon());
 
-        }
+        } else if (verifyRepositories() && !createFolderAstor4Android()) {
 
-        if (verifyRepositories() && !createFolderAstor4Android()) {
+            configureAstor4android();
 
             boolean parameters_ok = verifyInputs();
 
             if (parameters_ok) {
 
                 executeRepairTool();
-                finishExecution();
-
-                Messages.showMessageDialog("Para encerrar o AVD, copie e cole no terminal:" +
-                        " 'sudo printf 'auth %s\\nkill\\n' $(sudo cat ~/.emulator_console_auth_token) | netcat localhost 5554'", "AVD SHUTDOWN", Messages.getInformationIcon());
             }
         }
 
@@ -100,9 +96,11 @@ public class ManageAstor4Android implements RepairTool {
         }
     }
 
-    private void finishExecution() {
+    static void messageFinishExecution() {
 
         Messages.showMessageDialog("Tentativa de Reparo Finalizado!", "Concluido", Messages.getInformationIcon());
+        Messages.showMessageDialog("Para encerrar o AVD, copie e cole no terminal:" +
+                " 'sudo printf 'auth %s\\nkill\\n' $(sudo cat ~/.emulator_console_auth_token) | netcat localhost 5554'", "AVD SHUTDOWN", Messages.getInformationIcon());
     }
 
     private boolean createFolderAstor4Android() {
